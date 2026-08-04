@@ -10,4 +10,95 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+ 
+}
+
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum WorkspaceRole {
+  ADMIN
+  MEMBER
+}
+
+model User {
+  id                   String               @id @default(cuid())
+  email                String               @unique
+  passwordHash         String
+  firstName            String
+  lastName             String
+  isActive             Boolean              @default(true)
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  // Memberships
+  organizationMembers  OrganizationMember[]
+  workspaceMembers     WorkspaceMember[]
+
+  // Created entities
+  createdOrganizations Organization[]       @relation("OrganizationCreator")
+  createdWorkspaces    Workspace[]          @relation("WorkspaceCreator")
+}
+
+model Organization {
+  id          String               @id @default(cuid())
+  name        String
+  slug        String               @unique
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  createdById String
+  createdBy   User                 @relation("OrganizationCreator", fields: [createdById], references: [id])
+
+  members     OrganizationMember[]
+  workspaces  Workspace[]
+}
+
+model OrganizationMember {
+  id             String             @id @default(cuid())
+  role           OrganizationRole
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  userId         String
+  organizationId String
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+}
+
+model Workspace {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organizationId String
+  createdById    String
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User         @relation("WorkspaceCreator", fields: [createdById], references: [id])
+
+  members      WorkspaceMember[]
+}
+
+model WorkspaceMember {
+  id          String          @id @default(cuid())
+  role        WorkspaceRole
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  workspaceId String
+  userId      String
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
 }
