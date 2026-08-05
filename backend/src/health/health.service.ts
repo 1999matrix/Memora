@@ -14,7 +14,7 @@ export class HealthService {
 
       return {
         success: true,
-        status: 'healthy',
+        status: 'healthy hun hmesha',
         database: 'connected',
         timestamp: new Date().toISOString(),
       };

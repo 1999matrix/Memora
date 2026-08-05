@@ -4,6 +4,8 @@ import compression from 'compression';
 import helmet from 'helmet';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +25,15 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  
+app.useGlobalFilters(
+  new HttpExceptionFilter(),
+);
+
+app.useGlobalInterceptors(
+  new ResponseInterceptor(),
+);
 
   const config = new DocumentBuilder()
     .setTitle('Enterprise AI Assistant')
