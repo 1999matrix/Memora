@@ -4,8 +4,9 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -24,23 +25,44 @@ enum WorkspaceRole {
   MEMBER
 }
 
+enum UserRole {
+  SUPER_ADMIN
+  USER
+}
+
 model User {
-  id                   String               @id @default(cuid())
-  email                String               @unique
-  passwordHash         String
-  firstName            String
-  lastName             String
-  isActive             Boolean              @default(true)
-  createdAt            DateTime             @default(now())
-  updatedAt            DateTime             @updatedAt
 
-  // Memberships
-  organizationMembers  OrganizationMember[]
-  workspaceMembers     WorkspaceMember[]
+  id String @id @default(cuid())
 
-  // Created entities
-  createdOrganizations Organization[]       @relation("OrganizationCreator")
-  createdWorkspaces    Workspace[]          @relation("WorkspaceCreator")
+  email String @unique
+
+  passwordHash String
+
+  firstName String
+
+  lastName String
+
+  role UserRole @default(USER)
+
+  isActive Boolean @default(true)
+
+  emailVerified Boolean @default(false)
+
+  refreshTokenHash String?
+
+  lastLoginAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  organizations OrganizationMember[]
+
+  workspaces WorkspaceMember[]
+
+  createdOrganizations Organization[] @relation("OrganizationCreator")
+
+  createdWorkspaces Workspace[] @relation("WorkspaceCreator")
 }
 
 model Organization {

@@ -8,20 +8,19 @@ import { ConfigModule } from '@nestjs/config';
 import { configuration, validationSchema } from './config';
 import { PrismaModule } from './prisma';
 
-
-
 @Module({
   imports: [
-    AuthModule, UsersModule, OrganizationsModule, WorkspacesModule, HealthModule,
-
+    AuthModule,
+    UsersModule,
+    OrganizationsModule,
+    WorkspacesModule,
+    HealthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
       validationSchema,
     }),
     PrismaModule,
-    
   ],
-
 })
 export class AppModule {}
