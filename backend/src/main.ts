@@ -1,21 +1,29 @@
+import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import compression from 'compression';
 import helmet from 'helmet';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
+
+import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  const configService = app.get(ConfigService);
+  const logger = app.get(Logger);
+
+  app.useLogger(logger);
   app.use(helmet());
-
   app.use(compression());
-
   app.enableCors({
     origin: true,
     credentials: true,
+  });
+
+  app.setGlobalPrefix('api', {
+    exclude: ['health', 'health/live', 'health/ready'],
   });
 
   app.useGlobalPipes(
@@ -25,37 +33,24 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+  app.useGlobalFilters(new HttpExceptionFilter());
 
-  
-app.useGlobalFilters(
-  new HttpExceptionFilter(),
-);
-
-app.useGlobalInterceptors(
-  new ResponseInterceptor(),
-);
-
-  const config = new DocumentBuilder()
-    .setTitle('Enterprise AI Assistant')
+  const swagger = new DocumentBuilder()
+    .setTitle(
+      configService.get<string>('app.name') || 'Enterprise AI Assistant',
+    )
     .setDescription('Enterprise Knowledge Assistant APIs')
-    .setVersion('1.0')
+    .setVersion(configService.get<string>('app.version') || '1.0.0')
     .addBearerAuth()
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, SwaggerModule.createDocument(app, swagger));
 
-  SwaggerModule.setup('docs', app, document);
+  const port = configService.get<number>('app.port') || 3000;
+  await app.listen(port);
 
-  await app.listen(process.env.PORT || 3000);
-
-  console.log(
-    `🚀 Server running on http://localhost:${process.env.PORT || 3000}`,
-  );
-
-  console.log(
-    `📚 Swagger Docs : http://localhost:${process.env.PORT || 3000}/docs`,
-  );
- 
-  
+  logger.log(`Server running on http://localhost:${port}`);
+  logger.log(`Swagger docs at http://localhost:${port}/docs`);
 }
+
 bootstrap();

@@ -1,11 +1,18 @@
 export interface JwtPayload {
+  sub: string;
+  email: string;
+  role: string;
+}
 
-    sub: string;
-  
-    email: string;
-  
-    organizationId: string;
-  
-    workspaceId: string;
-  
-  }
+export interface AuthUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  isActive: boolean;
+  emailVerified: boolean;
+  lastLoginAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
