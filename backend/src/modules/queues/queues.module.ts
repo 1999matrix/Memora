@@ -2,7 +2,11 @@ import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { DOCUMENT_QUEUE } from '../../common/constants/rag.constants';
+import {
+  CONNECTOR_SYNC_QUEUE,
+  DOCUMENT_QUEUE,
+  SUMMARY_QUEUE,
+} from '../../common/constants/rag.constants';
 import { DocumentProcessingService } from './document-processing.service';
 import { DocumentProcessor } from './document.processor';
 
@@ -19,7 +23,11 @@ import { DocumentProcessor } from './document.processor';
         },
       }),
     }),
-    BullModule.registerQueue({ name: DOCUMENT_QUEUE }),
+    BullModule.registerQueue(
+      { name: DOCUMENT_QUEUE },
+      { name: CONNECTOR_SYNC_QUEUE },
+      { name: SUMMARY_QUEUE },
+    ),
   ],
   providers: [DocumentProcessingService, DocumentProcessor],
   exports: [BullModule, DocumentProcessingService],

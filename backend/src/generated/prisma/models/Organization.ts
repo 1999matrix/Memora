@@ -195,6 +195,7 @@ export type OrganizationWhereInput = {
   workspaces?: Prisma.WorkspaceListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  connectors?: Prisma.ConnectorListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -209,6 +210,7 @@ export type OrganizationOrderByWithRelationInput = {
   workspaces?: Prisma.WorkspaceOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
+  connectors?: Prisma.ConnectorOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -226,6 +228,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   workspaces?: Prisma.WorkspaceListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  connectors?: Prisma.ConnectorListRelationFilter
 }, "id" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -263,6 +266,7 @@ export type OrganizationCreateInput = {
   workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -276,6 +280,7 @@ export type OrganizationUncheckedCreateInput = {
   workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -289,6 +294,7 @@ export type OrganizationUpdateInput = {
   workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -302,6 +308,7 @@ export type OrganizationUncheckedUpdateInput = {
   workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -456,6 +463,20 @@ export type OrganizationUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDocumentsInput, Prisma.OrganizationUpdateWithoutDocumentsInput>, Prisma.OrganizationUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutConnectorsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutConnectorsInput, Prisma.OrganizationUncheckedCreateWithoutConnectorsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutConnectorsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutConnectorsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutConnectorsInput, Prisma.OrganizationUncheckedCreateWithoutConnectorsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutConnectorsInput
+  upsert?: Prisma.OrganizationUpsertWithoutConnectorsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutConnectorsInput, Prisma.OrganizationUpdateWithoutConnectorsInput>, Prisma.OrganizationUncheckedUpdateWithoutConnectorsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutConversationsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutConversationsInput, Prisma.OrganizationUncheckedCreateWithoutConversationsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutConversationsInput
@@ -480,6 +501,7 @@ export type OrganizationCreateWithoutCreatedByInput = {
   workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCreatedByInput = {
@@ -492,6 +514,7 @@ export type OrganizationUncheckedCreateWithoutCreatedByInput = {
   workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCreatedByInput = {
@@ -542,6 +565,7 @@ export type OrganizationCreateWithoutMembersInput = {
   workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembersInput = {
@@ -554,6 +578,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembersInput = {
@@ -582,6 +607,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembersInput = {
@@ -594,6 +620,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutWorkspacesInput = {
@@ -606,6 +633,7 @@ export type OrganizationCreateWithoutWorkspacesInput = {
   members?: Prisma.OrganizationMemberCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutWorkspacesInput = {
@@ -618,6 +646,7 @@ export type OrganizationUncheckedCreateWithoutWorkspacesInput = {
   members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutWorkspacesInput = {
@@ -646,6 +675,7 @@ export type OrganizationUpdateWithoutWorkspacesInput = {
   members?: Prisma.OrganizationMemberUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutWorkspacesInput = {
@@ -658,6 +688,7 @@ export type OrganizationUncheckedUpdateWithoutWorkspacesInput = {
   members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDocumentsInput = {
@@ -670,6 +701,7 @@ export type OrganizationCreateWithoutDocumentsInput = {
   members?: Prisma.OrganizationMemberCreateNestedManyWithoutOrganizationInput
   workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDocumentsInput = {
@@ -682,6 +714,7 @@ export type OrganizationUncheckedCreateWithoutDocumentsInput = {
   members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutOrganizationInput
   workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDocumentsInput = {
@@ -710,6 +743,7 @@ export type OrganizationUpdateWithoutDocumentsInput = {
   members?: Prisma.OrganizationMemberUpdateManyWithoutOrganizationNestedInput
   workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDocumentsInput = {
@@ -721,6 +755,75 @@ export type OrganizationUncheckedUpdateWithoutDocumentsInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutConnectorsInput = {
+  id?: string
+  name: string
+  slug: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedOrganizationsInput
+  members?: Prisma.OrganizationMemberCreateNestedManyWithoutOrganizationInput
+  workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutConnectorsInput = {
+  id?: string
+  name: string
+  slug: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById: string
+  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutOrganizationInput
+  workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutConnectorsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutConnectorsInput, Prisma.OrganizationUncheckedCreateWithoutConnectorsInput>
+}
+
+export type OrganizationUpsertWithoutConnectorsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutConnectorsInput, Prisma.OrganizationUncheckedUpdateWithoutConnectorsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutConnectorsInput, Prisma.OrganizationUncheckedCreateWithoutConnectorsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutConnectorsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutConnectorsInput, Prisma.OrganizationUncheckedUpdateWithoutConnectorsInput>
+}
+
+export type OrganizationUpdateWithoutConnectorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedOrganizationsNestedInput
+  members?: Prisma.OrganizationMemberUpdateManyWithoutOrganizationNestedInput
+  workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutConnectorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -734,6 +837,7 @@ export type OrganizationCreateWithoutConversationsInput = {
   members?: Prisma.OrganizationMemberCreateNestedManyWithoutOrganizationInput
   workspaces?: Prisma.WorkspaceCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutConversationsInput = {
@@ -746,6 +850,7 @@ export type OrganizationUncheckedCreateWithoutConversationsInput = {
   members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutOrganizationInput
   workspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOrganizationInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutConversationsInput = {
@@ -774,6 +879,7 @@ export type OrganizationUpdateWithoutConversationsInput = {
   members?: Prisma.OrganizationMemberUpdateManyWithoutOrganizationNestedInput
   workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutConversationsInput = {
@@ -786,6 +892,7 @@ export type OrganizationUncheckedUpdateWithoutConversationsInput = {
   members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyCreatedByInput = {
@@ -806,6 +913,7 @@ export type OrganizationUpdateWithoutCreatedByInput = {
   workspaces?: Prisma.WorkspaceUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCreatedByInput = {
@@ -818,6 +926,7 @@ export type OrganizationUncheckedUpdateWithoutCreatedByInput = {
   workspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOrganizationNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutOrganizationNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateManyWithoutCreatedByInput = {
@@ -838,6 +947,7 @@ export type OrganizationCountOutputType = {
   workspaces: number
   documents: number
   conversations: number
+  connectors: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -845,6 +955,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   workspaces?: boolean | OrganizationCountOutputTypeCountWorkspacesArgs
   documents?: boolean | OrganizationCountOutputTypeCountDocumentsArgs
   conversations?: boolean | OrganizationCountOutputTypeCountConversationsArgs
+  connectors?: boolean | OrganizationCountOutputTypeCountConnectorsArgs
 }
 
 /**
@@ -885,6 +996,13 @@ export type OrganizationCountOutputTypeCountConversationsArgs<ExtArgs extends ru
   where?: Prisma.ConversationWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountConnectorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConnectorWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -898,6 +1016,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   workspaces?: boolean | Prisma.Organization$workspacesArgs<ExtArgs>
   documents?: boolean | Prisma.Organization$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Organization$conversationsArgs<ExtArgs>
+  connectors?: boolean | Prisma.Organization$connectorsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -937,6 +1056,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   workspaces?: boolean | Prisma.Organization$workspacesArgs<ExtArgs>
   documents?: boolean | Prisma.Organization$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Organization$conversationsArgs<ExtArgs>
+  connectors?: boolean | Prisma.Organization$connectorsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -954,6 +1074,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     workspaces: Prisma.$WorkspacePayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    connectors: Prisma.$ConnectorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1361,6 +1482,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   workspaces<T extends Prisma.Organization$workspacesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$workspacesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Organization$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Organization$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  connectors<T extends Prisma.Organization$connectorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$connectorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1890,6 +2012,30 @@ export type Organization$conversationsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * Organization.connectors
+ */
+export type Organization$connectorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Connector
+   */
+  select?: Prisma.ConnectorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Connector
+   */
+  omit?: Prisma.ConnectorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConnectorInclude<ExtArgs> | null
+  where?: Prisma.ConnectorWhereInput
+  orderBy?: Prisma.ConnectorOrderByWithRelationInput | Prisma.ConnectorOrderByWithRelationInput[]
+  cursor?: Prisma.ConnectorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConnectorScalarFieldEnum | Prisma.ConnectorScalarFieldEnum[]
 }
 
 /**

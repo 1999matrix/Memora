@@ -203,6 +203,7 @@ export type WorkspaceWhereInput = {
   members?: Prisma.WorkspaceMemberListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  connectors?: Prisma.ConnectorListRelationFilter
 }
 
 export type WorkspaceOrderByWithRelationInput = {
@@ -218,6 +219,7 @@ export type WorkspaceOrderByWithRelationInput = {
   members?: Prisma.WorkspaceMemberOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
+  connectors?: Prisma.ConnectorOrderByRelationAggregateInput
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -236,6 +238,7 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   members?: Prisma.WorkspaceMemberListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  connectors?: Prisma.ConnectorListRelationFilter
 }, "id">
 
 export type WorkspaceOrderByWithAggregationInput = {
@@ -275,6 +278,7 @@ export type WorkspaceCreateInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateInput = {
@@ -288,6 +292,7 @@ export type WorkspaceUncheckedCreateInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUpdateInput = {
@@ -301,6 +306,7 @@ export type WorkspaceUpdateInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateInput = {
@@ -314,6 +320,7 @@ export type WorkspaceUncheckedUpdateInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyInput = {
@@ -501,6 +508,20 @@ export type WorkspaceUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutDocumentsInput, Prisma.WorkspaceUpdateWithoutDocumentsInput>, Prisma.WorkspaceUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type WorkspaceCreateNestedOneWithoutConnectorsInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutConnectorsInput, Prisma.WorkspaceUncheckedCreateWithoutConnectorsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutConnectorsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutConnectorsInput, Prisma.WorkspaceUncheckedCreateWithoutConnectorsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutConnectorsInput
+  upsert?: Prisma.WorkspaceUpsertWithoutConnectorsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutConnectorsInput, Prisma.WorkspaceUpdateWithoutConnectorsInput>, Prisma.WorkspaceUncheckedUpdateWithoutConnectorsInput>
+}
+
 export type WorkspaceCreateNestedOneWithoutConversationsInput = {
   create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutConversationsInput, Prisma.WorkspaceUncheckedCreateWithoutConversationsInput>
   connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutConversationsInput
@@ -525,6 +546,7 @@ export type WorkspaceCreateWithoutCreatedByInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutCreatedByInput = {
@@ -537,6 +559,7 @@ export type WorkspaceUncheckedCreateWithoutCreatedByInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutCreatedByInput = {
@@ -588,6 +611,7 @@ export type WorkspaceCreateWithoutOrganizationInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutOrganizationInput = {
@@ -600,6 +624,7 @@ export type WorkspaceUncheckedCreateWithoutOrganizationInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutOrganizationInput = {
@@ -638,6 +663,7 @@ export type WorkspaceCreateWithoutMembersInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedWorkspacesInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -650,6 +676,7 @@ export type WorkspaceUncheckedCreateWithoutMembersInput = {
   createdById: string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutMembersInput = {
@@ -678,6 +705,7 @@ export type WorkspaceUpdateWithoutMembersInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedWorkspacesNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
@@ -690,6 +718,7 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutDocumentsInput = {
@@ -702,6 +731,7 @@ export type WorkspaceCreateWithoutDocumentsInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedWorkspacesInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutDocumentsInput = {
@@ -714,6 +744,7 @@ export type WorkspaceUncheckedCreateWithoutDocumentsInput = {
   createdById: string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutDocumentsInput = {
@@ -742,6 +773,7 @@ export type WorkspaceUpdateWithoutDocumentsInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedWorkspacesNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutDocumentsInput = {
@@ -753,6 +785,75 @@ export type WorkspaceUncheckedUpdateWithoutDocumentsInput = {
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutConnectorsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutWorkspacesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedWorkspacesInput
+  members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutConnectorsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organizationId: string
+  createdById: string
+  members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutConnectorsInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutConnectorsInput, Prisma.WorkspaceUncheckedCreateWithoutConnectorsInput>
+}
+
+export type WorkspaceUpsertWithoutConnectorsInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutConnectorsInput, Prisma.WorkspaceUncheckedUpdateWithoutConnectorsInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutConnectorsInput, Prisma.WorkspaceUncheckedCreateWithoutConnectorsInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutConnectorsInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutConnectorsInput, Prisma.WorkspaceUncheckedUpdateWithoutConnectorsInput>
+}
+
+export type WorkspaceUpdateWithoutConnectorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutWorkspacesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedWorkspacesNestedInput
+  members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutConnectorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
@@ -766,6 +867,7 @@ export type WorkspaceCreateWithoutConversationsInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedWorkspacesInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutConversationsInput = {
@@ -778,6 +880,7 @@ export type WorkspaceUncheckedCreateWithoutConversationsInput = {
   createdById: string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutConversationsInput = {
@@ -806,6 +909,7 @@ export type WorkspaceUpdateWithoutConversationsInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedWorkspacesNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutConversationsInput = {
@@ -818,6 +922,7 @@ export type WorkspaceUncheckedUpdateWithoutConversationsInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyCreatedByInput = {
@@ -839,6 +944,7 @@ export type WorkspaceUpdateWithoutCreatedByInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutCreatedByInput = {
@@ -851,6 +957,7 @@ export type WorkspaceUncheckedUpdateWithoutCreatedByInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateManyWithoutCreatedByInput = {
@@ -881,6 +988,7 @@ export type WorkspaceUpdateWithoutOrganizationInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutOrganizationInput = {
@@ -893,6 +1001,7 @@ export type WorkspaceUncheckedUpdateWithoutOrganizationInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateManyWithoutOrganizationInput = {
@@ -913,12 +1022,14 @@ export type WorkspaceCountOutputType = {
   members: number
   documents: number
   conversations: number
+  connectors: number
 }
 
 export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | WorkspaceCountOutputTypeCountMembersArgs
   documents?: boolean | WorkspaceCountOutputTypeCountDocumentsArgs
   conversations?: boolean | WorkspaceCountOutputTypeCountConversationsArgs
+  connectors?: boolean | WorkspaceCountOutputTypeCountConnectorsArgs
 }
 
 /**
@@ -952,6 +1063,13 @@ export type WorkspaceCountOutputTypeCountConversationsArgs<ExtArgs extends runti
   where?: Prisma.ConversationWhereInput
 }
 
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountConnectorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConnectorWhereInput
+}
+
 
 export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -966,6 +1084,7 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
   documents?: boolean | Prisma.Workspace$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Workspace$conversationsArgs<ExtArgs>
+  connectors?: boolean | Prisma.Workspace$connectorsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
@@ -1010,6 +1129,7 @@ export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
   documents?: boolean | Prisma.Workspace$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Workspace$conversationsArgs<ExtArgs>
+  connectors?: boolean | Prisma.Workspace$connectorsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1029,6 +1149,7 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     members: Prisma.$WorkspaceMemberPayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    connectors: Prisma.$ConnectorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1437,6 +1558,7 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
   members<T extends Prisma.Workspace$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Workspace$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Workspace$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  connectors<T extends Prisma.Workspace$connectorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$connectorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1943,6 +2065,30 @@ export type Workspace$conversationsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * Workspace.connectors
+ */
+export type Workspace$connectorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Connector
+   */
+  select?: Prisma.ConnectorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Connector
+   */
+  omit?: Prisma.ConnectorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConnectorInclude<ExtArgs> | null
+  where?: Prisma.ConnectorWhereInput
+  orderBy?: Prisma.ConnectorOrderByWithRelationInput | Prisma.ConnectorOrderByWithRelationInput[]
+  cursor?: Prisma.ConnectorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConnectorScalarFieldEnum | Prisma.ConnectorScalarFieldEnum[]
 }
 
 /**

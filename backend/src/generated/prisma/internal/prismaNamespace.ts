@@ -403,9 +403,12 @@ export const ModelName = {
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
   Document: 'Document',
+  Connector: 'Connector',
+  ConnectorSyncItem: 'ConnectorSyncItem',
   DocumentVersion: 'DocumentVersion',
   DocumentChunk: 'DocumentChunk',
   Conversation: 'Conversation',
+  ConversationSummary: 'ConversationSummary',
   Message: 'Message'
 } as const
 
@@ -422,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "organization" | "organizationMember" | "workspace" | "workspaceMember" | "document" | "documentVersion" | "documentChunk" | "conversation" | "message"
+    modelProps: "user" | "organization" | "organizationMember" | "workspace" | "workspaceMember" | "document" | "connector" | "connectorSyncItem" | "documentVersion" | "documentChunk" | "conversation" | "conversationSummary" | "message"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -870,6 +873,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Connector: {
+      payload: Prisma.$ConnectorPayload<ExtArgs>
+      fields: Prisma.ConnectorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConnectorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConnectorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        findFirst: {
+          args: Prisma.ConnectorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConnectorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        findMany: {
+          args: Prisma.ConnectorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>[]
+        }
+        create: {
+          args: Prisma.ConnectorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        createMany: {
+          args: Prisma.ConnectorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConnectorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>[]
+        }
+        delete: {
+          args: Prisma.ConnectorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        update: {
+          args: Prisma.ConnectorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConnectorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConnectorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConnectorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConnectorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorPayload>
+        }
+        aggregate: {
+          args: Prisma.ConnectorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConnector>
+        }
+        groupBy: {
+          args: Prisma.ConnectorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConnectorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConnectorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConnectorCountAggregateOutputType> | number
+        }
+      }
+    }
+    ConnectorSyncItem: {
+      payload: Prisma.$ConnectorSyncItemPayload<ExtArgs>
+      fields: Prisma.ConnectorSyncItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConnectorSyncItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConnectorSyncItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        findFirst: {
+          args: Prisma.ConnectorSyncItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConnectorSyncItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        findMany: {
+          args: Prisma.ConnectorSyncItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>[]
+        }
+        create: {
+          args: Prisma.ConnectorSyncItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        createMany: {
+          args: Prisma.ConnectorSyncItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConnectorSyncItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>[]
+        }
+        delete: {
+          args: Prisma.ConnectorSyncItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        update: {
+          args: Prisma.ConnectorSyncItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConnectorSyncItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConnectorSyncItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConnectorSyncItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConnectorSyncItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConnectorSyncItemPayload>
+        }
+        aggregate: {
+          args: Prisma.ConnectorSyncItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConnectorSyncItem>
+        }
+        groupBy: {
+          args: Prisma.ConnectorSyncItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConnectorSyncItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConnectorSyncItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConnectorSyncItemCountAggregateOutputType> | number
+        }
+      }
+    }
     DocumentVersion: {
       payload: Prisma.$DocumentVersionPayload<ExtArgs>
       fields: Prisma.DocumentVersionFieldRefs
@@ -1092,6 +1243,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ConversationSummary: {
+      payload: Prisma.$ConversationSummaryPayload<ExtArgs>
+      fields: Prisma.ConversationSummaryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConversationSummaryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConversationSummaryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        findFirst: {
+          args: Prisma.ConversationSummaryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConversationSummaryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        findMany: {
+          args: Prisma.ConversationSummaryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>[]
+        }
+        create: {
+          args: Prisma.ConversationSummaryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        createMany: {
+          args: Prisma.ConversationSummaryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConversationSummaryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>[]
+        }
+        delete: {
+          args: Prisma.ConversationSummaryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        update: {
+          args: Prisma.ConversationSummaryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConversationSummaryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConversationSummaryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConversationSummaryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConversationSummaryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationSummaryPayload>
+        }
+        aggregate: {
+          args: Prisma.ConversationSummaryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConversationSummary>
+        }
+        groupBy: {
+          args: Prisma.ConversationSummaryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationSummaryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConversationSummaryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationSummaryCountAggregateOutputType> | number
+        }
+      }
+    }
     Message: {
       payload: Prisma.$MessagePayload<ExtArgs>
       fields: Prisma.MessageFieldRefs
@@ -1284,11 +1509,50 @@ export const DocumentScalarFieldEnum = {
   organizationId: 'organizationId',
   workspaceId: 'workspaceId',
   uploadedById: 'uploadedById',
+  connectorId: 'connectorId',
+  externalId: 'externalId',
+  contentHash: 'contentHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const ConnectorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  status: 'status',
+  config: 'config',
+  lastSyncedAt: 'lastSyncedAt',
+  syncCursor: 'syncCursor',
+  lastError: 'lastError',
+  organizationId: 'organizationId',
+  workspaceId: 'workspaceId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConnectorScalarFieldEnum = (typeof ConnectorScalarFieldEnum)[keyof typeof ConnectorScalarFieldEnum]
+
+
+export const ConnectorSyncItemScalarFieldEnum = {
+  id: 'id',
+  connectorId: 'connectorId',
+  documentId: 'documentId',
+  externalId: 'externalId',
+  externalUpdatedAt: 'externalUpdatedAt',
+  contentHash: 'contentHash',
+  lastSyncedAt: 'lastSyncedAt',
+  deletedAt: 'deletedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConnectorSyncItemScalarFieldEnum = (typeof ConnectorSyncItemScalarFieldEnum)[keyof typeof ConnectorSyncItemScalarFieldEnum]
 
 
 export const DocumentVersionScalarFieldEnum = {
@@ -1332,6 +1596,18 @@ export const ConversationScalarFieldEnum = {
 export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
 
 
+export const ConversationSummaryScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  summary: 'summary',
+  messageCountAtSummary: 'messageCountAtSummary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationSummaryScalarFieldEnum = (typeof ConversationSummaryScalarFieldEnum)[keyof typeof ConversationSummaryScalarFieldEnum]
+
+
 export const MessageScalarFieldEnum = {
   id: 'id',
   conversationId: 'conversationId',
@@ -1358,6 +1634,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1507,6 +1790,34 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'ConnectorType'
+ */
+export type EnumConnectorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConnectorType'>
+    
+
+
+/**
+ * Reference to a field of type 'ConnectorType[]'
+ */
+export type ListEnumConnectorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConnectorType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ConnectorStatus'
+ */
+export type EnumConnectorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConnectorStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ConnectorStatus[]'
+ */
+export type ListEnumConnectorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConnectorStatus[]'>
     
 
 
@@ -1694,9 +2005,12 @@ export type GlobalOmitConfig = {
   workspace?: Prisma.WorkspaceOmit
   workspaceMember?: Prisma.WorkspaceMemberOmit
   document?: Prisma.DocumentOmit
+  connector?: Prisma.ConnectorOmit
+  connectorSyncItem?: Prisma.ConnectorSyncItemOmit
   documentVersion?: Prisma.DocumentVersionOmit
   documentChunk?: Prisma.DocumentChunkOmit
   conversation?: Prisma.ConversationOmit
+  conversationSummary?: Prisma.ConversationSummaryOmit
   message?: Prisma.MessageOmit
 }
 

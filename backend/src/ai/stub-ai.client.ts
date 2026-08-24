@@ -97,6 +97,10 @@ export class StubAiClient implements AiClient {
 
     const answer = [
       `Stub answer for: "${request.question}"`,
+      request.conversationSummary
+        ? `Memory summary: ${request.conversationSummary.slice(0, 200)}`
+        : 'Memory summary: (none yet)',
+      `Recent turns in prompt: ${request.history.length}`,
       '',
       request.contexts[0]
         ? `Based on retrieved context: ${request.contexts[0].content.slice(0, 240)}...`
@@ -112,6 +116,24 @@ export class StubAiClient implements AiClient {
     for (const part of parts) {
       yield part;
     }
+  }
+
+  async summarizeConversation(request: {
+    previousSummary: string | null;
+    messages: { role: string; content: string }[];
+  }): Promise<string> {
+    this.logger.warn('STUB summarizeConversation — rolling digest');
+    const digest = request.messages
+      .slice(-12)
+      .map((m) => `${m.role}: ${m.content.slice(0, 80)}`)
+      .join(' | ');
+    const base = request.previousSummary
+      ? `Prior: ${request.previousSummary.slice(0, 200)} || `
+      : '';
+    return `${base}Stub summary covering ${request.messages.length} msgs — ${digest}`.slice(
+      0,
+      1500,
+    );
   }
 
   private hashEmbed(text: string): number[] {

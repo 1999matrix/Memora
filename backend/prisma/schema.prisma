@@ -40,6 +40,24 @@ enum MessageRole {
   SYSTEM
 }
 
+enum ConnectorType {
+  GOOGLE_DRIVE
+  GITHUB
+  NOTION
+  CONFLUENCE
+  JIRA
+  SLACK
+  SHAREPOINT
+  POSTGRESQL
+}
+
+enum ConnectorStatus {
+  DISCONNECTED
+  CONNECTED
+  SYNCING
+  ERROR
+}
+
 model User {
   id               String    @id @default(cuid())
   email            String    @unique
@@ -75,6 +93,7 @@ model Organization {
   workspaces    Workspace[]
   documents     Document[]
   conversations Conversation[]
+  connectors    Connector[]
 }
 
 model OrganizationMember {
@@ -104,6 +123,7 @@ model Workspace {
   members       WorkspaceMember[]
   documents     Document[]
   conversations Conversation[]
+  connectors    Connector[]
 }
 
 model WorkspaceMember {
@@ -131,17 +151,68 @@ model Document {
   organizationId String
   workspaceId    String
   uploadedById   String
+  connectorId    String?
+  externalId     String?
+  contentHash    String?
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
   organization Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   workspace    Workspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   uploadedBy   User              @relation("DocumentUploader", fields: [uploadedById], references: [id])
+  connector    Connector?        @relation(fields: [connectorId], references: [id], onDelete: SetNull)
   versions     DocumentVersion[]
   chunks       DocumentChunk[]
+  syncItems    ConnectorSyncItem[]
 
+  @@unique([connectorId, externalId])
   @@index([workspaceId, status])
   @@index([organizationId])
+}
+
+model Connector {
+  id               String          @id @default(cuid())
+  name             String
+  type             ConnectorType
+  status           ConnectorStatus @default(DISCONNECTED)
+  /// Non-secret config (repo, folder id, db name). Secrets stay in env/secret store later.
+  config           Json            @default("{}")
+  lastSyncedAt     DateTime?
+  syncCursor       String?
+  lastError        String?
+  organizationId   String
+  workspaceId      String
+  createdById      String
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  organization Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace    Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  documents    Document[]
+  syncItems    ConnectorSyncItem[]
+
+  @@index([workspaceId])
+  @@index([organizationId, type])
+}
+
+model ConnectorSyncItem {
+  id                 String    @id @default(cuid())
+  connectorId        String
+  documentId         String?
+  externalId         String
+  externalUpdatedAt  DateTime?
+  contentHash        String?
+  lastSyncedAt       DateTime?
+  deletedAt          DateTime?
+  metadata           Json?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  connector Connector @relation(fields: [connectorId], references: [id], onDelete: Cascade)
+  document  Document? @relation(fields: [documentId], references: [id], onDelete: SetNull)
+
+  @@unique([connectorId, externalId])
+  @@index([connectorId, lastSyncedAt])
 }
 
 model DocumentVersion {
@@ -187,12 +258,25 @@ model Conversation {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  workspace    Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace    Workspace             @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   messages     Message[]
+  summary      ConversationSummary?
 
   @@index([workspaceId, userId])
+}
+
+model ConversationSummary {
+  id                     String   @id @default(cuid())
+  conversationId         String   @unique
+  summary                String
+  /// Number of messages covered by this rolling summary.
+  messageCountAtSummary  Int
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }
 
 model Message {

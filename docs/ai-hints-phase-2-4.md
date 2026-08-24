@@ -33,8 +33,14 @@ You currently run on **`StubAiClient`**. Swap methods one by one — Nest wiring
 ## 5. Chat streaming (`chatStream`)
 
 - **Goal:** `AsyncGenerator<string>` of answer tokens; cite sources from `contexts`
-- **Hint:** OpenAI Responses/Chat Completions with `stream: true`; prompt = system + contexts + history + question
+- **Hint:** OpenAI Responses/Chat Completions with `stream: true`; prompt = system + **conversationSummary** + recent history + contexts + question
 - **Citations:** Nest already sends structured `citations` in SSE `meta` event — keep document/chunk ids stable
+
+## 6. Conversation summarization (`summarizeConversation`) — Phase 6
+
+- **Goal:** Compress older turns into a rolling summary so the model never sees the full thread
+- **Hint:** Call an LLM with `previousSummary` + messages older than the recent window; return 1–2 paragraphs
+- **Wiring:** BullMQ `summary-generation` job; Nest keeps last `RECENT_MESSAGE_LIMIT` messages verbatim
 
 ## Suggested learning order
 

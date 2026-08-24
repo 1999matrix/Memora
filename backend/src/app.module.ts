@@ -12,6 +12,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { configuration, validationSchema } from './config';
 import { AuthModule } from './modules/auth/auth.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { ConnectorsModule } from './modules/connectors/connectors.module';
 import { DocumentsModule } from './modules/documents/documents.module';
 import { HealthModule } from './modules/health/health.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
@@ -76,6 +77,7 @@ import { StorageModule } from './storage/storage.module';
     OrganizationsModule,
     WorkspacesModule,
     DocumentsModule,
+    ConnectorsModule,
     RetrievalModule,
     ChatModule,
     HealthModule,

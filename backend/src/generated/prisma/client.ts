@@ -70,6 +70,16 @@ export type WorkspaceMember = Prisma.WorkspaceMemberModel
  */
 export type Document = Prisma.DocumentModel
 /**
+ * Model Connector
+ * 
+ */
+export type Connector = Prisma.ConnectorModel
+/**
+ * Model ConnectorSyncItem
+ * 
+ */
+export type ConnectorSyncItem = Prisma.ConnectorSyncItemModel
+/**
  * Model DocumentVersion
  * 
  */
@@ -84,6 +94,11 @@ export type DocumentChunk = Prisma.DocumentChunkModel
  * 
  */
 export type Conversation = Prisma.ConversationModel
+/**
+ * Model ConversationSummary
+ * 
+ */
+export type ConversationSummary = Prisma.ConversationSummaryModel
 /**
  * Model Message
  * 

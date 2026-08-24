@@ -30,7 +30,15 @@ export interface ChatCitation {
 export interface ChatRequest {
   question: string;
   contexts: RetrievedChunk[];
+  /** Older conversation compressed into a rolling summary (may be empty). */
+  conversationSummary?: string | null;
+  /** Only the recent window — never the full thread. */
   history: { role: 'user' | 'assistant'; content: string }[];
+}
+
+export interface ConversationSummaryRequest {
+  previousSummary: string | null;
+  messages: { role: 'user' | 'assistant' | 'system'; content: string }[];
 }
 
 export interface AiClient {
@@ -54,4 +62,12 @@ export interface AiClient {
    * Replace with real streaming LLM later.
    */
   chatStream(request: ChatRequest): AsyncGenerator<string, void, unknown>;
+
+  /**
+   * Compress older turns into a rolling summary for multi-turn memory.
+   * Stub returns a deterministic digest — replace with a real summarizer LLM.
+   */
+  summarizeConversation(
+    request: ConversationSummaryRequest,
+  ): Promise<string>;
 }

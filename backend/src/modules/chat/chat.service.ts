@@ -1,13 +1,18 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 
 import {
   AI_CLIENT,
   type AiClient,
   type ChatCitation,
 } from '../../ai/ai-client.interface';
+import { SUMMARY_QUEUE } from '../../common/constants/rag.constants';
 import { MembershipService } from '../../common/services/membership.service';
 import { PrismaService } from '../../prisma';
 import { RetrievalService } from '../retrieval/retrieval.service';
+import { ConversationMemoryService } from './conversation-memory.service';
+import { SummaryJobData } from './summary.processor';
 
 @Injectable()
 export class ChatService {
@@ -15,7 +20,10 @@ export class ChatService {
     private readonly prisma: PrismaService,
     private readonly membership: MembershipService,
     private readonly retrieval: RetrievalService,
+    private readonly memory: ConversationMemoryService,
     @Inject(AI_CLIENT) private readonly ai: AiClient,
+    @InjectQueue(SUMMARY_QUEUE)
+    private readonly summaryQueue: Queue<SummaryJobData>,
   ) {}
 
   async listConversations(userId: string, workspaceId: string) {
@@ -25,6 +33,7 @@ export class ChatService {
       orderBy: { updatedAt: 'desc' },
       include: {
         messages: { orderBy: { createdAt: 'desc' }, take: 1 },
+        summary: true,
       },
     });
   }
@@ -32,7 +41,10 @@ export class ChatService {
   async getConversation(userId: string, conversationId: string) {
     const conversation = await this.prisma.conversation.findUnique({
       where: { id: conversationId },
-      include: { messages: { orderBy: { createdAt: 'asc' } } },
+      include: {
+        messages: { orderBy: { createdAt: 'asc' } },
+        summary: true,
+      },
     });
 
     if (!conversation) {
@@ -51,6 +63,11 @@ export class ChatService {
     return conversation;
   }
 
+  async getMemory(userId: string, conversationId: string) {
+    await this.getConversation(userId, conversationId);
+    return this.memory.buildMemory(conversationId);
+  }
+
   async deleteConversation(userId: string, conversationId: string) {
     await this.getConversation(userId, conversationId);
     await this.prisma.conversation.delete({ where: { id: conversationId } });
@@ -63,7 +80,15 @@ export class ChatService {
     message: string,
     conversationId?: string,
   ): AsyncGenerator<
-    | { type: 'meta'; conversationId: string; citations: ChatCitation[] }
+    | {
+        type: 'meta';
+        conversationId: string;
+        citations: ChatCitation[];
+        memory: {
+          hasSummary: boolean;
+          recentTurns: number;
+        };
+      }
     | { type: 'token'; content: string }
     | { type: 'done' }
   > {
@@ -109,11 +134,7 @@ export class ChatService {
       },
     });
 
-    const historyRows = await this.prisma.message.findMany({
-      where: { conversationId: conversation.id },
-      orderBy: { createdAt: 'asc' },
-      take: 12,
-    });
+    const memoryBundle = await this.memory.buildMemory(conversation.id);
 
     const contexts = await this.retrieval.search(
       userId,
@@ -135,18 +156,18 @@ export class ChatService {
       type: 'meta',
       conversationId: conversation.id,
       citations,
+      memory: {
+        hasSummary: Boolean(memoryBundle.conversationSummary),
+        recentTurns: memoryBundle.recentHistory.length,
+      },
     };
 
     let full = '';
     for await (const token of this.ai.chatStream({
       question: message,
       contexts,
-      history: historyRows
-        .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
-        .map((m) => ({
-          role: m.role === 'USER' ? ('user' as const) : ('assistant' as const),
-          content: m.content,
-        })),
+      conversationSummary: memoryBundle.conversationSummary,
+      history: memoryBundle.recentHistory,
     })) {
       full += token;
       yield { type: 'token', content: token };
@@ -165,6 +186,25 @@ export class ChatService {
       where: { id: conversation.id },
       data: { updatedAt: new Date() },
     });
+
+    const totalAfter = memoryBundle.totalMessages + 1; /* assistant just written */
+    if (
+      this.memory.shouldRefreshSummary(
+        totalAfter,
+        memoryBundle.summarizedThrough,
+      )
+    ) {
+      await this.summaryQueue.add(
+        'refresh',
+        { conversationId: conversation.id },
+        {
+          removeOnComplete: 50,
+          removeOnFail: 20,
+          attempts: 3,
+          backoff: { type: 'exponential', delay: 2000 },
+        },
+      );
+    }
 
     yield { type: 'done' };
   }

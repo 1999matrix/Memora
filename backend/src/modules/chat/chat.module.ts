@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
 
+import { QueuesModule } from '../queues/queues.module';
 import { RetrievalModule } from '../retrieval/retrieval.module';
 import { ChatController } from './chat.controller';
 import { ChatService } from './chat.service';
+import { ConversationMemoryService } from './conversation-memory.service';
+import { SummaryProcessor } from './summary.processor';
 
 @Module({
-  imports: [RetrievalModule],
+  imports: [RetrievalModule, QueuesModule],
   controllers: [ChatController],
-  providers: [ChatService],
+  providers: [ChatService, ConversationMemoryService, SummaryProcessor],
+  exports: [ConversationMemoryService],
 })
 export class ChatModule {}

@@ -57,9 +57,12 @@ export const ModelName = {
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
   Document: 'Document',
+  Connector: 'Connector',
+  ConnectorSyncItem: 'ConnectorSyncItem',
   DocumentVersion: 'DocumentVersion',
   DocumentChunk: 'DocumentChunk',
   Conversation: 'Conversation',
+  ConversationSummary: 'ConversationSummary',
   Message: 'Message'
 } as const
 
@@ -158,11 +161,50 @@ export const DocumentScalarFieldEnum = {
   organizationId: 'organizationId',
   workspaceId: 'workspaceId',
   uploadedById: 'uploadedById',
+  connectorId: 'connectorId',
+  externalId: 'externalId',
+  contentHash: 'contentHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const ConnectorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  status: 'status',
+  config: 'config',
+  lastSyncedAt: 'lastSyncedAt',
+  syncCursor: 'syncCursor',
+  lastError: 'lastError',
+  organizationId: 'organizationId',
+  workspaceId: 'workspaceId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConnectorScalarFieldEnum = (typeof ConnectorScalarFieldEnum)[keyof typeof ConnectorScalarFieldEnum]
+
+
+export const ConnectorSyncItemScalarFieldEnum = {
+  id: 'id',
+  connectorId: 'connectorId',
+  documentId: 'documentId',
+  externalId: 'externalId',
+  externalUpdatedAt: 'externalUpdatedAt',
+  contentHash: 'contentHash',
+  lastSyncedAt: 'lastSyncedAt',
+  deletedAt: 'deletedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConnectorSyncItemScalarFieldEnum = (typeof ConnectorSyncItemScalarFieldEnum)[keyof typeof ConnectorSyncItemScalarFieldEnum]
 
 
 export const DocumentVersionScalarFieldEnum = {
@@ -206,6 +248,18 @@ export const ConversationScalarFieldEnum = {
 export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
 
 
+export const ConversationSummaryScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  summary: 'summary',
+  messageCountAtSummary: 'messageCountAtSummary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationSummaryScalarFieldEnum = (typeof ConversationSummaryScalarFieldEnum)[keyof typeof ConversationSummaryScalarFieldEnum]
+
+
 export const MessageScalarFieldEnum = {
   id: 'id',
   conversationId: 'conversationId',
@@ -232,6 +286,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

@@ -68,6 +68,11 @@ export class ChatController {
     return this.chatService.getConversation(user.id, id);
   }
 
+  @Get('conversations/:id/memory')
+  getMemory(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return this.chatService.getMemory(user.id, id);
+  }
+
   @Delete('conversations/:id')
   remove(@CurrentUser() user: AuthUser, @Param('id') id: string) {
     return this.chatService.deleteConversation(user.id, id);

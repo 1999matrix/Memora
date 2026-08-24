@@ -51,3 +51,27 @@ export const MessageRole = {
 } as const
 
 export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
+
+
+export const ConnectorType = {
+  GOOGLE_DRIVE: 'GOOGLE_DRIVE',
+  GITHUB: 'GITHUB',
+  NOTION: 'NOTION',
+  CONFLUENCE: 'CONFLUENCE',
+  JIRA: 'JIRA',
+  SLACK: 'SLACK',
+  SHAREPOINT: 'SHAREPOINT',
+  POSTGRESQL: 'POSTGRESQL'
+} as const
+
+export type ConnectorType = (typeof ConnectorType)[keyof typeof ConnectorType]
+
+
+export const ConnectorStatus = {
+  DISCONNECTED: 'DISCONNECTED',
+  CONNECTED: 'CONNECTED',
+  SYNCING: 'SYNCING',
+  ERROR: 'ERROR'
+} as const
+
+export type ConnectorStatus = (typeof ConnectorStatus)[keyof typeof ConnectorStatus]
