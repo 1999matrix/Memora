@@ -27,6 +27,12 @@ services:
       timeout: 5s
       retries: 10
 
+  # Stub AI sidecar placeholder — replace with FastAPI image later
+  ai-service:
+    image: nginx:alpine
+    restart: unless-stopped
+    command: ['sh', '-c', 'echo AI stub placeholder && sleep infinity']
+
   backend:
     build: .
     restart: unless-stopped
@@ -35,20 +41,41 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    environment:
+    environment: &backend_env
       PORT: 3000
-      NODE_ENV: development
+      NODE_ENV: production
       APP_NAME: Enterprise AI Assistant
       APP_VERSION: 1.0.0
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/memora
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_ACCESS_SECRET: docker-dev-access-secret
-      JWT_REFRESH_SECRET: docker-dev-refresh-secret
+      JWT_ACCESS_SECRET: docker-prod-access-secret-change-me
+      JWT_REFRESH_SECRET: docker-prod-refresh-secret-change-me
       JWT_ACCESS_EXPIRES_IN: 15m
       JWT_REFRESH_EXPIRES_IN: 7d
+      STORAGE_ROOT: /app/storage
+    volumes:
+      - storage_data:/app/storage
     ports:
       - '3000:3000'
+    command: ['node', 'dist/src/main.js']
+
+  # Same image, Nest process hosts BullMQ workers via AppModule processors
+  worker:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      <<: *backend_env
+      PORT: 3001
+    volumes:
+      - storage_data:/app/storage
+    command: ['node', 'dist/src/main.js']
 
 volumes:
   postgres_data:
+  storage_data:

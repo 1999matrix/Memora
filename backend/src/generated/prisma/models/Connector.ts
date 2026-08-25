@@ -246,6 +246,7 @@ export type ConnectorWhereInput = {
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   documents?: Prisma.DocumentListRelationFilter
   syncItems?: Prisma.ConnectorSyncItemListRelationFilter
+  knowledgeSummary?: Prisma.XOR<Prisma.KnowledgeSummaryNullableScalarRelationFilter, Prisma.KnowledgeSummaryWhereInput> | null
 }
 
 export type ConnectorOrderByWithRelationInput = {
@@ -266,6 +267,7 @@ export type ConnectorOrderByWithRelationInput = {
   workspace?: Prisma.WorkspaceOrderByWithRelationInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   syncItems?: Prisma.ConnectorSyncItemOrderByRelationAggregateInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryOrderByWithRelationInput
 }
 
 export type ConnectorWhereUniqueInput = Prisma.AtLeast<{
@@ -289,6 +291,7 @@ export type ConnectorWhereUniqueInput = Prisma.AtLeast<{
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   documents?: Prisma.DocumentListRelationFilter
   syncItems?: Prisma.ConnectorSyncItemListRelationFilter
+  knowledgeSummary?: Prisma.XOR<Prisma.KnowledgeSummaryNullableScalarRelationFilter, Prisma.KnowledgeSummaryWhereInput> | null
 }, "id">
 
 export type ConnectorOrderByWithAggregationInput = {
@@ -345,6 +348,7 @@ export type ConnectorCreateInput = {
   workspace: Prisma.WorkspaceCreateNestedOneWithoutConnectorsInput
   documents?: Prisma.DocumentCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUncheckedCreateInput = {
@@ -363,6 +367,7 @@ export type ConnectorUncheckedCreateInput = {
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUpdateInput = {
@@ -381,6 +386,7 @@ export type ConnectorUpdateInput = {
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateInput = {
@@ -399,6 +405,7 @@ export type ConnectorUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorCreateManyInput = {
@@ -635,6 +642,22 @@ export type ConnectorUpdateOneRequiredWithoutSyncItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConnectorUpdateToOneWithWhereWithoutSyncItemsInput, Prisma.ConnectorUpdateWithoutSyncItemsInput>, Prisma.ConnectorUncheckedUpdateWithoutSyncItemsInput>
 }
 
+export type ConnectorCreateNestedOneWithoutKnowledgeSummaryInput = {
+  create?: Prisma.XOR<Prisma.ConnectorCreateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedCreateWithoutKnowledgeSummaryInput>
+  connectOrCreate?: Prisma.ConnectorCreateOrConnectWithoutKnowledgeSummaryInput
+  connect?: Prisma.ConnectorWhereUniqueInput
+}
+
+export type ConnectorUpdateOneWithoutKnowledgeSummaryNestedInput = {
+  create?: Prisma.XOR<Prisma.ConnectorCreateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedCreateWithoutKnowledgeSummaryInput>
+  connectOrCreate?: Prisma.ConnectorCreateOrConnectWithoutKnowledgeSummaryInput
+  upsert?: Prisma.ConnectorUpsertWithoutKnowledgeSummaryInput
+  disconnect?: Prisma.ConnectorWhereInput | boolean
+  delete?: Prisma.ConnectorWhereInput | boolean
+  connect?: Prisma.ConnectorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConnectorUpdateToOneWithWhereWithoutKnowledgeSummaryInput, Prisma.ConnectorUpdateWithoutKnowledgeSummaryInput>, Prisma.ConnectorUncheckedUpdateWithoutKnowledgeSummaryInput>
+}
+
 export type ConnectorCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -650,6 +673,7 @@ export type ConnectorCreateWithoutOrganizationInput = {
   workspace: Prisma.WorkspaceCreateNestedOneWithoutConnectorsInput
   documents?: Prisma.DocumentCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUncheckedCreateWithoutOrganizationInput = {
@@ -667,6 +691,7 @@ export type ConnectorUncheckedCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorCreateOrConnectWithoutOrganizationInput = {
@@ -729,6 +754,7 @@ export type ConnectorCreateWithoutWorkspaceInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutConnectorsInput
   documents?: Prisma.DocumentCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUncheckedCreateWithoutWorkspaceInput = {
@@ -746,6 +772,7 @@ export type ConnectorUncheckedCreateWithoutWorkspaceInput = {
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutConnectorInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorCreateOrConnectWithoutWorkspaceInput = {
@@ -789,6 +816,7 @@ export type ConnectorCreateWithoutDocumentsInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutConnectorsInput
   workspace: Prisma.WorkspaceCreateNestedOneWithoutConnectorsInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUncheckedCreateWithoutDocumentsInput = {
@@ -806,6 +834,7 @@ export type ConnectorUncheckedCreateWithoutDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorCreateOrConnectWithoutDocumentsInput = {
@@ -839,6 +868,7 @@ export type ConnectorUpdateWithoutDocumentsInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutConnectorsNestedInput
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateWithoutDocumentsInput = {
@@ -856,6 +886,7 @@ export type ConnectorUncheckedUpdateWithoutDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorCreateWithoutSyncItemsInput = {
@@ -873,6 +904,7 @@ export type ConnectorCreateWithoutSyncItemsInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutConnectorsInput
   workspace: Prisma.WorkspaceCreateNestedOneWithoutConnectorsInput
   documents?: Prisma.DocumentCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorUncheckedCreateWithoutSyncItemsInput = {
@@ -890,6 +922,7 @@ export type ConnectorUncheckedCreateWithoutSyncItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutConnectorInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutConnectorInput
 }
 
 export type ConnectorCreateOrConnectWithoutSyncItemsInput = {
@@ -923,6 +956,7 @@ export type ConnectorUpdateWithoutSyncItemsInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutConnectorsNestedInput
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateWithoutSyncItemsInput = {
@@ -940,6 +974,95 @@ export type ConnectorUncheckedUpdateWithoutSyncItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutConnectorNestedInput
+}
+
+export type ConnectorCreateWithoutKnowledgeSummaryInput = {
+  id?: string
+  name: string
+  type: $Enums.ConnectorType
+  status?: $Enums.ConnectorStatus
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSyncedAt?: Date | string | null
+  syncCursor?: string | null
+  lastError?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutConnectorsInput
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutConnectorsInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutConnectorInput
+  syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutConnectorInput
+}
+
+export type ConnectorUncheckedCreateWithoutKnowledgeSummaryInput = {
+  id?: string
+  name: string
+  type: $Enums.ConnectorType
+  status?: $Enums.ConnectorStatus
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSyncedAt?: Date | string | null
+  syncCursor?: string | null
+  lastError?: string | null
+  organizationId: string
+  workspaceId: string
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutConnectorInput
+  syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutConnectorInput
+}
+
+export type ConnectorCreateOrConnectWithoutKnowledgeSummaryInput = {
+  where: Prisma.ConnectorWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConnectorCreateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedCreateWithoutKnowledgeSummaryInput>
+}
+
+export type ConnectorUpsertWithoutKnowledgeSummaryInput = {
+  update: Prisma.XOR<Prisma.ConnectorUpdateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedUpdateWithoutKnowledgeSummaryInput>
+  create: Prisma.XOR<Prisma.ConnectorCreateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedCreateWithoutKnowledgeSummaryInput>
+  where?: Prisma.ConnectorWhereInput
+}
+
+export type ConnectorUpdateToOneWithWhereWithoutKnowledgeSummaryInput = {
+  where?: Prisma.ConnectorWhereInput
+  data: Prisma.XOR<Prisma.ConnectorUpdateWithoutKnowledgeSummaryInput, Prisma.ConnectorUncheckedUpdateWithoutKnowledgeSummaryInput>
+}
+
+export type ConnectorUpdateWithoutKnowledgeSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumConnectorTypeFieldUpdateOperationsInput | $Enums.ConnectorType
+  status?: Prisma.EnumConnectorStatusFieldUpdateOperationsInput | $Enums.ConnectorStatus
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  syncCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutConnectorsNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutConnectorNestedInput
+  syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutConnectorNestedInput
+}
+
+export type ConnectorUncheckedUpdateWithoutKnowledgeSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumConnectorTypeFieldUpdateOperationsInput | $Enums.ConnectorType
+  status?: Prisma.EnumConnectorStatusFieldUpdateOperationsInput | $Enums.ConnectorStatus
+  config?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  syncCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutConnectorNestedInput
+  syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutConnectorNestedInput
 }
 
 export type ConnectorCreateManyOrganizationInput = {
@@ -972,6 +1095,7 @@ export type ConnectorUpdateWithoutOrganizationInput = {
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateWithoutOrganizationInput = {
@@ -989,6 +1113,7 @@ export type ConnectorUncheckedUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1036,6 +1161,7 @@ export type ConnectorUpdateWithoutWorkspaceInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutConnectorsNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateWithoutWorkspaceInput = {
@@ -1053,6 +1179,7 @@ export type ConnectorUncheckedUpdateWithoutWorkspaceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutConnectorNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutConnectorNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutConnectorNestedInput
 }
 
 export type ConnectorUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -1128,6 +1255,7 @@ export type ConnectorSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.Connector$documentsArgs<ExtArgs>
   syncItems?: boolean | Prisma.Connector$syncItemsArgs<ExtArgs>
+  knowledgeSummary?: boolean | Prisma.Connector$knowledgeSummaryArgs<ExtArgs>
   _count?: boolean | Prisma.ConnectorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["connector"]>
 
@@ -1189,6 +1317,7 @@ export type ConnectorInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.Connector$documentsArgs<ExtArgs>
   syncItems?: boolean | Prisma.Connector$syncItemsArgs<ExtArgs>
+  knowledgeSummary?: boolean | Prisma.Connector$knowledgeSummaryArgs<ExtArgs>
   _count?: boolean | Prisma.ConnectorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConnectorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1207,6 +1336,7 @@ export type $ConnectorPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     workspace: Prisma.$WorkspacePayload<ExtArgs>
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     syncItems: Prisma.$ConnectorSyncItemPayload<ExtArgs>[]
+    knowledgeSummary: Prisma.$KnowledgeSummaryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1623,6 +1753,7 @@ export interface Prisma__ConnectorClient<T, Null = never, ExtArgs extends runtim
   workspace<T extends Prisma.WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkspaceDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkspaceClient<runtime.Types.Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.Connector$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connector$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   syncItems<T extends Prisma.Connector$syncItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connector$syncItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectorSyncItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  knowledgeSummary<T extends Prisma.Connector$knowledgeSummaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connector$knowledgeSummaryArgs<ExtArgs>>): Prisma.Prisma__KnowledgeSummaryClient<runtime.Types.Result.GetResult<Prisma.$KnowledgeSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2111,6 +2242,25 @@ export type Connector$syncItemsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ConnectorSyncItemScalarFieldEnum | Prisma.ConnectorSyncItemScalarFieldEnum[]
+}
+
+/**
+ * Connector.knowledgeSummary
+ */
+export type Connector$knowledgeSummaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KnowledgeSummary
+   */
+  select?: Prisma.KnowledgeSummarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KnowledgeSummary
+   */
+  omit?: Prisma.KnowledgeSummaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KnowledgeSummaryInclude<ExtArgs> | null
+  where?: Prisma.KnowledgeSummaryWhereInput
 }
 
 /**

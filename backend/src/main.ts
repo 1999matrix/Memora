@@ -21,8 +21,9 @@ async function bootstrap() {
     origin: true,
     credentials: true,
   });
+  app.enableShutdownHooks();
 
-  app.setGlobalPrefix('api', {
+  app.setGlobalPrefix('api/v1', {
     exclude: ['health', 'health/live', 'health/ready'],
   });
 

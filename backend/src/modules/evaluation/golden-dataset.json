@@ -1,0 +1,20 @@
+[
+  {
+    "id": "pto-policy",
+    "question": "How many annual leave days does the PTO policy provide?",
+    "expectedSourceHints": ["PTO", "leave", "24"],
+    "expectedAnswerHints": ["24"]
+  },
+  {
+    "id": "security-review",
+    "question": "What is required before production deploys?",
+    "expectedSourceHints": ["Security", "deploy"],
+    "expectedAnswerHints": ["Security reviews", "production"]
+  },
+  {
+    "id": "connector-sync",
+    "question": "What does Memora connector sync do?",
+    "expectedSourceHints": ["connector", "sync"],
+    "expectedAnswerHints": ["sync", "connector"]
+  }
+]

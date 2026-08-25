@@ -15,6 +15,7 @@ type Hit = {
   pageNumber: number | null;
   documentName: string;
   score: number;
+  isSummary?: boolean;
 };
 
 @Injectable()
@@ -33,6 +34,7 @@ export class RetrievalService {
   ): Promise<RetrievedChunk[]> {
     await this.membership.assertWorkspaceMember(userId, workspaceId);
 
+    const started = Date.now();
     const [queryEmbedding] = await this.ai.embed([query]);
     const vectorLiteral = `[${queryEmbedding.join(',')}]`;
 
@@ -44,7 +46,8 @@ export class RetrievalService {
         c.content,
         c."pageNumber",
         d.name AS "documentName",
-        (1 - (c.embedding <=> $1::vector))::float AS score
+        (1 - (c.embedding <=> $1::vector))::float AS score,
+        false AS "isSummary"
       FROM "DocumentChunk" c
       INNER JOIN "Document" d ON d.id = c."documentId"
       WHERE c."workspaceId" = $2
@@ -69,7 +72,8 @@ export class RetrievalService {
         ts_rank(
           to_tsvector('english', c.content),
           plainto_tsquery('english', $1)
-        )::float AS score
+        )::float AS score,
+        false AS "isSummary"
       FROM "DocumentChunk" c
       INNER JOIN "Document" d ON d.id = c."documentId"
       WHERE c."workspaceId" = $2
@@ -83,8 +87,29 @@ export class RetrievalService {
       topK,
     );
 
+    const summaryHits = await this.prisma.$queryRawUnsafe<Hit[]>(
+      `
+      SELECT
+        s.id,
+        COALESCE(s."documentId", s.id) AS "documentId",
+        s.summary AS content,
+        NULL::int AS "pageNumber",
+        ('[summary:' || s.kind || '] ' || s.title) AS "documentName",
+        (1 - (s.embedding <=> $1::vector))::float AS score,
+        true AS "isSummary"
+      FROM "KnowledgeSummary" s
+      WHERE s."workspaceId" = $2
+        AND s.embedding IS NOT NULL
+      ORDER BY s.embedding <=> $1::vector
+      LIMIT $3
+      `,
+      vectorLiteral,
+      workspaceId,
+      Math.max(3, Math.floor(topK / 2)),
+    );
+
     const fused = this.reciprocalRankFusion(
-      vectorHits ?? [],
+      [...(vectorHits ?? []), ...(summaryHits ?? [])],
       lexicalHits ?? [],
       topK * 2,
     );
@@ -97,8 +122,28 @@ export class RetrievalService {
       pageNumber: h.pageNumber,
       score: Number(h.score),
       sourceUrl: null,
-      metadata: { stubPipeline: true },
+      metadata: {
+        stubPipeline: true,
+        isSummary: Boolean(h.isSummary),
+      },
     }));
+
+    const workspace = await this.prisma.workspace.findUnique({
+      where: { id: workspaceId },
+      select: { organizationId: true },
+    });
+
+    await this.prisma.retrievalQueryLog.create({
+      data: {
+        workspaceId,
+        organizationId: workspace?.organizationId,
+        userId,
+        query,
+        topK,
+        resultCount: mapped.length,
+        latencyMs: Date.now() - started,
+      },
+    });
 
     return this.ai.rerank(query, mapped);
   }

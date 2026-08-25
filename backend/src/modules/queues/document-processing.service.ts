@@ -1,9 +1,13 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { createHash } from 'crypto';
+import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 
 import { AI_CLIENT, type AiClient } from '../../ai/ai-client.interface';
+import { SUMMARY_QUEUE } from '../../common/constants/rag.constants';
 import { PrismaService } from '../../prisma';
 import { FILE_STORAGE, type FileStorage } from '../../storage/file-storage.interface';
+import type { KnowledgeSummaryJobData } from '../summaries/knowledge-summary.service';
 
 @Injectable()
 export class DocumentProcessingService {
@@ -13,6 +17,8 @@ export class DocumentProcessingService {
     private readonly prisma: PrismaService,
     @Inject(FILE_STORAGE) private readonly storage: FileStorage,
     @Inject(AI_CLIENT) private readonly ai: AiClient,
+    @InjectQueue(SUMMARY_QUEUE)
+    private readonly summaryQueue: Queue<KnowledgeSummaryJobData>,
   ) {}
 
   async processDocument(documentId: string): Promise<void> {
@@ -83,6 +89,17 @@ export class DocumentProcessingService {
         where: { id: documentId },
         data: { status: 'READY' },
       });
+
+      await this.summaryQueue.add(
+        'document',
+        { kind: 'DOCUMENT', documentId },
+        {
+          removeOnComplete: 50,
+          removeOnFail: 20,
+          attempts: 3,
+          backoff: { type: 'exponential', delay: 2000 },
+        },
+      );
     } catch (error) {
       const message =
         error instanceof Error ? error.message : 'Document processing failed';

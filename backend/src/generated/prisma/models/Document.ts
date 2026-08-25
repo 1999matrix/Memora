@@ -307,6 +307,7 @@ export type DocumentWhereInput = {
   versions?: Prisma.DocumentVersionListRelationFilter
   chunks?: Prisma.DocumentChunkListRelationFilter
   syncItems?: Prisma.ConnectorSyncItemListRelationFilter
+  knowledgeSummary?: Prisma.XOR<Prisma.KnowledgeSummaryNullableScalarRelationFilter, Prisma.KnowledgeSummaryWhereInput> | null
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -333,6 +334,7 @@ export type DocumentOrderByWithRelationInput = {
   versions?: Prisma.DocumentVersionOrderByRelationAggregateInput
   chunks?: Prisma.DocumentChunkOrderByRelationAggregateInput
   syncItems?: Prisma.ConnectorSyncItemOrderByRelationAggregateInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryOrderByWithRelationInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -363,6 +365,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   versions?: Prisma.DocumentVersionListRelationFilter
   chunks?: Prisma.DocumentChunkListRelationFilter
   syncItems?: Prisma.ConnectorSyncItemListRelationFilter
+  knowledgeSummary?: Prisma.XOR<Prisma.KnowledgeSummaryNullableScalarRelationFilter, Prisma.KnowledgeSummaryWhereInput> | null
 }, "id" | "connectorId_externalId">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -431,6 +434,7 @@ export type DocumentCreateInput = {
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -453,6 +457,7 @@ export type DocumentUncheckedCreateInput = {
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
@@ -475,6 +480,7 @@ export type DocumentUpdateInput = {
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -497,6 +503,7 @@ export type DocumentUncheckedUpdateInput = {
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
@@ -836,6 +843,22 @@ export type DocumentUpdateOneWithoutSyncItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutSyncItemsInput, Prisma.DocumentUpdateWithoutSyncItemsInput>, Prisma.DocumentUncheckedUpdateWithoutSyncItemsInput>
 }
 
+export type DocumentCreateNestedOneWithoutKnowledgeSummaryInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedCreateWithoutKnowledgeSummaryInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutKnowledgeSummaryInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneWithoutKnowledgeSummaryNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedCreateWithoutKnowledgeSummaryInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutKnowledgeSummaryInput
+  upsert?: Prisma.DocumentUpsertWithoutKnowledgeSummaryInput
+  disconnect?: Prisma.DocumentWhereInput | boolean
+  delete?: Prisma.DocumentWhereInput | boolean
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutKnowledgeSummaryInput, Prisma.DocumentUpdateWithoutKnowledgeSummaryInput>, Prisma.DocumentUncheckedUpdateWithoutKnowledgeSummaryInput>
+}
+
 export type DocumentCreateNestedOneWithoutVersionsInput = {
   create?: Prisma.XOR<Prisma.DocumentCreateWithoutVersionsInput, Prisma.DocumentUncheckedCreateWithoutVersionsInput>
   connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutVersionsInput
@@ -883,6 +906,7 @@ export type DocumentCreateWithoutUploadedByInput = {
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutUploadedByInput = {
@@ -904,6 +928,7 @@ export type DocumentUncheckedCreateWithoutUploadedByInput = {
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutUploadedByInput = {
@@ -973,6 +998,7 @@ export type DocumentCreateWithoutOrganizationInput = {
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutOrganizationInput = {
@@ -994,6 +1020,7 @@ export type DocumentUncheckedCreateWithoutOrganizationInput = {
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutOrganizationInput = {
@@ -1041,6 +1068,7 @@ export type DocumentCreateWithoutWorkspaceInput = {
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutWorkspaceInput = {
@@ -1062,6 +1090,7 @@ export type DocumentUncheckedCreateWithoutWorkspaceInput = {
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutWorkspaceInput = {
@@ -1109,6 +1138,7 @@ export type DocumentCreateWithoutConnectorInput = {
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutConnectorInput = {
@@ -1130,6 +1160,7 @@ export type DocumentUncheckedCreateWithoutConnectorInput = {
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutConnectorInput = {
@@ -1177,6 +1208,7 @@ export type DocumentCreateWithoutSyncItemsInput = {
   connector?: Prisma.ConnectorCreateNestedOneWithoutDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutSyncItemsInput = {
@@ -1198,6 +1230,7 @@ export type DocumentUncheckedCreateWithoutSyncItemsInput = {
   updatedAt?: Date | string
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutSyncItemsInput = {
@@ -1235,6 +1268,7 @@ export type DocumentUpdateWithoutSyncItemsInput = {
   connector?: Prisma.ConnectorUpdateOneWithoutDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutSyncItemsInput = {
@@ -1256,6 +1290,111 @@ export type DocumentUncheckedUpdateWithoutSyncItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
+}
+
+export type DocumentCreateWithoutKnowledgeSummaryInput = {
+  id?: string
+  name: string
+  mimeType: string
+  sizeBytes: number
+  storageKey: string
+  status?: $Enums.DocumentStatus
+  errorMessage?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  externalId?: string | null
+  contentHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutDocumentsInput
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutDocumentsInput
+  uploadedBy: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+  connector?: Prisma.ConnectorCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutKnowledgeSummaryInput = {
+  id?: string
+  name: string
+  mimeType: string
+  sizeBytes: number
+  storageKey: string
+  status?: $Enums.DocumentStatus
+  errorMessage?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  organizationId: string
+  workspaceId: string
+  uploadedById: string
+  connectorId?: string | null
+  externalId?: string | null
+  contentHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutKnowledgeSummaryInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedCreateWithoutKnowledgeSummaryInput>
+}
+
+export type DocumentUpsertWithoutKnowledgeSummaryInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedUpdateWithoutKnowledgeSummaryInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedCreateWithoutKnowledgeSummaryInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutKnowledgeSummaryInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutKnowledgeSummaryInput, Prisma.DocumentUncheckedUpdateWithoutKnowledgeSummaryInput>
+}
+
+export type DocumentUpdateWithoutKnowledgeSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  sizeBytes?: Prisma.IntFieldUpdateOperationsInput | number
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDocumentsNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutDocumentsNestedInput
+  uploadedBy?: Prisma.UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput
+  connector?: Prisma.ConnectorUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutKnowledgeSummaryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  sizeBytes?: Prisma.IntFieldUpdateOperationsInput | number
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  uploadedById?: Prisma.StringFieldUpdateOperationsInput | string
+  connectorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutVersionsInput = {
@@ -1277,6 +1416,7 @@ export type DocumentCreateWithoutVersionsInput = {
   connector?: Prisma.ConnectorCreateNestedOneWithoutDocumentsInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutVersionsInput = {
@@ -1298,6 +1438,7 @@ export type DocumentUncheckedCreateWithoutVersionsInput = {
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutVersionsInput = {
@@ -1335,6 +1476,7 @@ export type DocumentUpdateWithoutVersionsInput = {
   connector?: Prisma.ConnectorUpdateOneWithoutDocumentsNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutVersionsInput = {
@@ -1356,6 +1498,7 @@ export type DocumentUncheckedUpdateWithoutVersionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutChunksInput = {
@@ -1377,6 +1520,7 @@ export type DocumentCreateWithoutChunksInput = {
   connector?: Prisma.ConnectorCreateNestedOneWithoutDocumentsInput
   versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutChunksInput = {
@@ -1398,6 +1542,7 @@ export type DocumentUncheckedCreateWithoutChunksInput = {
   updatedAt?: Date | string
   versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedCreateNestedManyWithoutDocumentInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutChunksInput = {
@@ -1435,6 +1580,7 @@ export type DocumentUpdateWithoutChunksInput = {
   connector?: Prisma.ConnectorUpdateOneWithoutDocumentsNestedInput
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutChunksInput = {
@@ -1456,6 +1602,7 @@ export type DocumentUncheckedUpdateWithoutChunksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyUploadedByInput = {
@@ -1495,6 +1642,7 @@ export type DocumentUpdateWithoutUploadedByInput = {
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutUploadedByInput = {
@@ -1516,6 +1664,7 @@ export type DocumentUncheckedUpdateWithoutUploadedByInput = {
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutUploadedByInput = {
@@ -1573,6 +1722,7 @@ export type DocumentUpdateWithoutOrganizationInput = {
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutOrganizationInput = {
@@ -1594,6 +1744,7 @@ export type DocumentUncheckedUpdateWithoutOrganizationInput = {
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1651,6 +1802,7 @@ export type DocumentUpdateWithoutWorkspaceInput = {
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutWorkspaceInput = {
@@ -1672,6 +1824,7 @@ export type DocumentUncheckedUpdateWithoutWorkspaceInput = {
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -1729,6 +1882,7 @@ export type DocumentUpdateWithoutConnectorInput = {
   versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutConnectorInput = {
@@ -1750,6 +1904,7 @@ export type DocumentUncheckedUpdateWithoutConnectorInput = {
   versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   syncItems?: Prisma.ConnectorSyncItemUncheckedUpdateManyWithoutDocumentNestedInput
+  knowledgeSummary?: Prisma.KnowledgeSummaryUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutConnectorInput = {
@@ -1843,6 +1998,7 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
   syncItems?: boolean | Prisma.Document$syncItemsArgs<ExtArgs>
+  knowledgeSummary?: boolean | Prisma.Document$knowledgeSummaryArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
@@ -1920,6 +2076,7 @@ export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
   syncItems?: boolean | Prisma.Document$syncItemsArgs<ExtArgs>
+  knowledgeSummary?: boolean | Prisma.Document$knowledgeSummaryArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1945,6 +2102,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     versions: Prisma.$DocumentVersionPayload<ExtArgs>[]
     chunks: Prisma.$DocumentChunkPayload<ExtArgs>[]
     syncItems: Prisma.$ConnectorSyncItemPayload<ExtArgs>[]
+    knowledgeSummary: Prisma.$KnowledgeSummaryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2364,6 +2522,7 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
   versions<T extends Prisma.Document$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chunks<T extends Prisma.Document$chunksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$chunksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentChunkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   syncItems<T extends Prisma.Document$syncItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$syncItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectorSyncItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  knowledgeSummary<T extends Prisma.Document$knowledgeSummaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$knowledgeSummaryArgs<ExtArgs>>): Prisma.Prisma__KnowledgeSummaryClient<runtime.Types.Result.GetResult<Prisma.$KnowledgeSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2898,6 +3057,25 @@ export type Document$syncItemsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ConnectorSyncItemScalarFieldEnum | Prisma.ConnectorSyncItemScalarFieldEnum[]
+}
+
+/**
+ * Document.knowledgeSummary
+ */
+export type Document$knowledgeSummaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KnowledgeSummary
+   */
+  select?: Prisma.KnowledgeSummarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KnowledgeSummary
+   */
+  omit?: Prisma.KnowledgeSummaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KnowledgeSummaryInclude<ExtArgs> | null
+  where?: Prisma.KnowledgeSummaryWhereInput
 }
 
 /**

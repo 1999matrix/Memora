@@ -41,6 +41,14 @@ export interface ConversationSummaryRequest {
   messages: { role: 'user' | 'assistant' | 'system'; content: string }[];
 }
 
+export type KnowledgeSummaryKind = 'DOCUMENT' | 'WORKSPACE' | 'CONNECTOR';
+
+export interface KnowledgeSummaryRequest {
+  kind: KnowledgeSummaryKind;
+  title: string;
+  text: string;
+}
+
 export interface AiClient {
   extractText(input: {
     buffer: Buffer;
@@ -70,4 +78,10 @@ export interface AiClient {
   summarizeConversation(
     request: ConversationSummaryRequest,
   ): Promise<string>;
+
+  /**
+   * Summarize document / workspace / connector knowledge.
+   * Stub returns a short digest — replace with a real summarizer LLM.
+   */
+  summarizeKnowledge(request: KnowledgeSummaryRequest): Promise<string>;
 }

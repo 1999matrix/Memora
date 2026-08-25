@@ -75,3 +75,20 @@ export const ConnectorStatus = {
 } as const
 
 export type ConnectorStatus = (typeof ConnectorStatus)[keyof typeof ConnectorStatus]
+
+
+export const KnowledgeSummaryKind = {
+  DOCUMENT: 'DOCUMENT',
+  WORKSPACE: 'WORKSPACE',
+  CONNECTOR: 'CONNECTOR'
+} as const
+
+export type KnowledgeSummaryKind = (typeof KnowledgeSummaryKind)[keyof typeof KnowledgeSummaryKind]
+
+
+export const FeedbackRating = {
+  UP: 'UP',
+  DOWN: 'DOWN'
+} as const
+
+export type FeedbackRating = (typeof FeedbackRating)[keyof typeof FeedbackRating]

@@ -136,6 +136,22 @@ export class StubAiClient implements AiClient {
     );
   }
 
+  async summarizeKnowledge(request: {
+    kind: string;
+    title: string;
+    text: string;
+  }): Promise<string> {
+    this.logger.warn(`STUB summarizeKnowledge — ${request.kind}`);
+    return [
+      `Stub ${request.kind} summary for "${request.title}"`,
+      request.text.slice(0, 400).replace(/\s+/g, ' ').trim(),
+      'Replace StubAiClient.summarizeKnowledge with a real summarizer.',
+    ]
+      .filter(Boolean)
+      .join(' — ')
+      .slice(0, 1200);
+  }
+
   private hashEmbed(text: string): number[] {
     const vector = new Array<number>(EMBEDDING_DIMENSIONS).fill(0);
     const hash = createHash('sha256').update(text).digest();

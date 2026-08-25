@@ -12,7 +12,9 @@ import { MembershipService } from '../../common/services/membership.service';
 import { PrismaService } from '../../prisma';
 import { RetrievalService } from '../retrieval/retrieval.service';
 import { ConversationMemoryService } from './conversation-memory.service';
-import { SummaryJobData } from './summary.processor';
+import type { KnowledgeSummaryJobData } from '../summaries/knowledge-summary.service';
+import { UsageService } from '../analytics/usage.service';
+import { AuditService } from '../../common/services/audit.service';
 
 @Injectable()
 export class ChatService {
@@ -23,7 +25,9 @@ export class ChatService {
     private readonly memory: ConversationMemoryService,
     @Inject(AI_CLIENT) private readonly ai: AiClient,
     @InjectQueue(SUMMARY_QUEUE)
-    private readonly summaryQueue: Queue<SummaryJobData>,
+    private readonly summaryQueue: Queue<KnowledgeSummaryJobData>,
+    private readonly usage: UsageService,
+    private readonly audit: AuditService,
   ) {}
 
   async listConversations(userId: string, workspaceId: string) {
@@ -163,6 +167,7 @@ export class ChatService {
     };
 
     let full = '';
+    const chatStarted = Date.now();
     for await (const token of this.ai.chatStream({
       question: message,
       contexts,
@@ -172,6 +177,34 @@ export class ChatService {
       full += token;
       yield { type: 'token', content: token };
     }
+
+    const durationMs = Date.now() - chatStarted;
+    // Stub token accounting until real provider usage is wired.
+    const approxIn = Math.ceil(message.length / 4) + contexts.length * 200;
+    const approxOut = Math.ceil(full.length / 4);
+    await this.usage.track({
+      provider: 'stub',
+      model: 'stub-chat',
+      operation: 'chatStream',
+      inputTokens: approxIn,
+      outputTokens: approxOut,
+      estimatedCostUsd: (approxIn + approxOut) * 0.0000002,
+      requestDurationMs: durationMs,
+      userId,
+      organizationId: conversation.organizationId,
+      workspaceId,
+      conversationId: conversation.id,
+    });
+
+    await this.audit.log({
+      action: 'chat.message',
+      resourceType: 'conversation',
+      resourceId: conversation.id,
+      userId,
+      organizationId: conversation.organizationId,
+      workspaceId,
+      metadata: { citations: citations.length, durationMs },
+    });
 
     await this.prisma.message.create({
       data: {
@@ -196,7 +229,7 @@ export class ChatService {
     ) {
       await this.summaryQueue.add(
         'refresh',
-        { conversationId: conversation.id },
+        { kind: 'CONVERSATION', conversationId: conversation.id },
         {
           removeOnComplete: 50,
           removeOnFail: 20,

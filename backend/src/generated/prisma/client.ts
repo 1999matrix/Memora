@@ -80,6 +80,11 @@ export type Connector = Prisma.ConnectorModel
  */
 export type ConnectorSyncItem = Prisma.ConnectorSyncItemModel
 /**
+ * Model KnowledgeSummary
+ * 
+ */
+export type KnowledgeSummary = Prisma.KnowledgeSummaryModel
+/**
  * Model DocumentVersion
  * 
  */
@@ -104,3 +109,28 @@ export type ConversationSummary = Prisma.ConversationSummaryModel
  * 
  */
 export type Message = Prisma.MessageModel
+/**
+ * Model MessageFeedback
+ * 
+ */
+export type MessageFeedback = Prisma.MessageFeedbackModel
+/**
+ * Model LlmUsageEvent
+ * 
+ */
+export type LlmUsageEvent = Prisma.LlmUsageEventModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model RetrievalQueryLog
+ * 
+ */
+export type RetrievalQueryLog = Prisma.RetrievalQueryLogModel
+/**
+ * Model EvaluationRun
+ * 
+ */
+export type EvaluationRun = Prisma.EvaluationRunModel

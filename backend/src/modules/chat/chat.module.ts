@@ -5,12 +5,11 @@ import { RetrievalModule } from '../retrieval/retrieval.module';
 import { ChatController } from './chat.controller';
 import { ChatService } from './chat.service';
 import { ConversationMemoryService } from './conversation-memory.service';
-import { SummaryProcessor } from './summary.processor';
 
 @Module({
   imports: [RetrievalModule, QueuesModule],
   controllers: [ChatController],
-  providers: [ChatService, ConversationMemoryService, SummaryProcessor],
+  providers: [ChatService, ConversationMemoryService],
   exports: [ConversationMemoryService],
 })
 export class ChatModule {}

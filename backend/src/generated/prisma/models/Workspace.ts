@@ -204,6 +204,7 @@ export type WorkspaceWhereInput = {
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   connectors?: Prisma.ConnectorListRelationFilter
+  knowledgeSummaries?: Prisma.KnowledgeSummaryListRelationFilter
 }
 
 export type WorkspaceOrderByWithRelationInput = {
@@ -220,6 +221,7 @@ export type WorkspaceOrderByWithRelationInput = {
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   connectors?: Prisma.ConnectorOrderByRelationAggregateInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryOrderByRelationAggregateInput
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -239,6 +241,7 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   connectors?: Prisma.ConnectorListRelationFilter
+  knowledgeSummaries?: Prisma.KnowledgeSummaryListRelationFilter
 }, "id">
 
 export type WorkspaceOrderByWithAggregationInput = {
@@ -279,6 +282,7 @@ export type WorkspaceCreateInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateInput = {
@@ -293,6 +297,7 @@ export type WorkspaceUncheckedCreateInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUpdateInput = {
@@ -307,6 +312,7 @@ export type WorkspaceUpdateInput = {
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateInput = {
@@ -321,6 +327,7 @@ export type WorkspaceUncheckedUpdateInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyInput = {
@@ -522,6 +529,20 @@ export type WorkspaceUpdateOneRequiredWithoutConnectorsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutConnectorsInput, Prisma.WorkspaceUpdateWithoutConnectorsInput>, Prisma.WorkspaceUncheckedUpdateWithoutConnectorsInput>
 }
 
+export type WorkspaceCreateNestedOneWithoutKnowledgeSummariesInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedCreateWithoutKnowledgeSummariesInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutKnowledgeSummariesInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutKnowledgeSummariesNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedCreateWithoutKnowledgeSummariesInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutKnowledgeSummariesInput
+  upsert?: Prisma.WorkspaceUpsertWithoutKnowledgeSummariesInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutKnowledgeSummariesInput, Prisma.WorkspaceUpdateWithoutKnowledgeSummariesInput>, Prisma.WorkspaceUncheckedUpdateWithoutKnowledgeSummariesInput>
+}
+
 export type WorkspaceCreateNestedOneWithoutConversationsInput = {
   create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutConversationsInput, Prisma.WorkspaceUncheckedCreateWithoutConversationsInput>
   connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutConversationsInput
@@ -547,6 +568,7 @@ export type WorkspaceCreateWithoutCreatedByInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutCreatedByInput = {
@@ -560,6 +582,7 @@ export type WorkspaceUncheckedCreateWithoutCreatedByInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutCreatedByInput = {
@@ -612,6 +635,7 @@ export type WorkspaceCreateWithoutOrganizationInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutOrganizationInput = {
@@ -625,6 +649,7 @@ export type WorkspaceUncheckedCreateWithoutOrganizationInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutOrganizationInput = {
@@ -664,6 +689,7 @@ export type WorkspaceCreateWithoutMembersInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -677,6 +703,7 @@ export type WorkspaceUncheckedCreateWithoutMembersInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutMembersInput = {
@@ -706,6 +733,7 @@ export type WorkspaceUpdateWithoutMembersInput = {
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
@@ -719,6 +747,7 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutDocumentsInput = {
@@ -732,6 +761,7 @@ export type WorkspaceCreateWithoutDocumentsInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutDocumentsInput = {
@@ -745,6 +775,7 @@ export type WorkspaceUncheckedCreateWithoutDocumentsInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutDocumentsInput = {
@@ -774,6 +805,7 @@ export type WorkspaceUpdateWithoutDocumentsInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutDocumentsInput = {
@@ -787,6 +819,7 @@ export type WorkspaceUncheckedUpdateWithoutDocumentsInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutConnectorsInput = {
@@ -800,6 +833,7 @@ export type WorkspaceCreateWithoutConnectorsInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutConnectorsInput = {
@@ -813,6 +847,7 @@ export type WorkspaceUncheckedCreateWithoutConnectorsInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutConnectorsInput = {
@@ -842,6 +877,7 @@ export type WorkspaceUpdateWithoutConnectorsInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutConnectorsInput = {
@@ -855,6 +891,79 @@ export type WorkspaceUncheckedUpdateWithoutConnectorsInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutKnowledgeSummariesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutWorkspacesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedWorkspacesInput
+  members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutKnowledgeSummariesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organizationId: string
+  createdById: string
+  members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutWorkspaceInput
+  connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutKnowledgeSummariesInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedCreateWithoutKnowledgeSummariesInput>
+}
+
+export type WorkspaceUpsertWithoutKnowledgeSummariesInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedUpdateWithoutKnowledgeSummariesInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedCreateWithoutKnowledgeSummariesInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutKnowledgeSummariesInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutKnowledgeSummariesInput, Prisma.WorkspaceUncheckedUpdateWithoutKnowledgeSummariesInput>
+}
+
+export type WorkspaceUpdateWithoutKnowledgeSummariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutWorkspacesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedWorkspacesNestedInput
+  members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutKnowledgeSummariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutConversationsInput = {
@@ -868,6 +977,7 @@ export type WorkspaceCreateWithoutConversationsInput = {
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutConversationsInput = {
@@ -881,6 +991,7 @@ export type WorkspaceUncheckedCreateWithoutConversationsInput = {
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutWorkspaceInput
   connectors?: Prisma.ConnectorUncheckedCreateNestedManyWithoutWorkspaceInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutConversationsInput = {
@@ -910,6 +1021,7 @@ export type WorkspaceUpdateWithoutConversationsInput = {
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutConversationsInput = {
@@ -923,6 +1035,7 @@ export type WorkspaceUncheckedUpdateWithoutConversationsInput = {
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyCreatedByInput = {
@@ -945,6 +1058,7 @@ export type WorkspaceUpdateWithoutCreatedByInput = {
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutCreatedByInput = {
@@ -958,6 +1072,7 @@ export type WorkspaceUncheckedUpdateWithoutCreatedByInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateManyWithoutCreatedByInput = {
@@ -989,6 +1104,7 @@ export type WorkspaceUpdateWithoutOrganizationInput = {
   documents?: Prisma.DocumentUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutOrganizationInput = {
@@ -1002,6 +1118,7 @@ export type WorkspaceUncheckedUpdateWithoutOrganizationInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutWorkspaceNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutWorkspaceNestedInput
   connectors?: Prisma.ConnectorUncheckedUpdateManyWithoutWorkspaceNestedInput
+  knowledgeSummaries?: Prisma.KnowledgeSummaryUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1023,6 +1140,7 @@ export type WorkspaceCountOutputType = {
   documents: number
   conversations: number
   connectors: number
+  knowledgeSummaries: number
 }
 
 export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1030,6 +1148,7 @@ export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   documents?: boolean | WorkspaceCountOutputTypeCountDocumentsArgs
   conversations?: boolean | WorkspaceCountOutputTypeCountConversationsArgs
   connectors?: boolean | WorkspaceCountOutputTypeCountConnectorsArgs
+  knowledgeSummaries?: boolean | WorkspaceCountOutputTypeCountKnowledgeSummariesArgs
 }
 
 /**
@@ -1070,6 +1189,13 @@ export type WorkspaceCountOutputTypeCountConnectorsArgs<ExtArgs extends runtime.
   where?: Prisma.ConnectorWhereInput
 }
 
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountKnowledgeSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.KnowledgeSummaryWhereInput
+}
+
 
 export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1085,6 +1211,7 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   documents?: boolean | Prisma.Workspace$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Workspace$conversationsArgs<ExtArgs>
   connectors?: boolean | Prisma.Workspace$connectorsArgs<ExtArgs>
+  knowledgeSummaries?: boolean | Prisma.Workspace$knowledgeSummariesArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
@@ -1130,6 +1257,7 @@ export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   documents?: boolean | Prisma.Workspace$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Workspace$conversationsArgs<ExtArgs>
   connectors?: boolean | Prisma.Workspace$connectorsArgs<ExtArgs>
+  knowledgeSummaries?: boolean | Prisma.Workspace$knowledgeSummariesArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1150,6 +1278,7 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
     connectors: Prisma.$ConnectorPayload<ExtArgs>[]
+    knowledgeSummaries: Prisma.$KnowledgeSummaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1559,6 +1688,7 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
   documents<T extends Prisma.Workspace$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Workspace$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   connectors<T extends Prisma.Workspace$connectorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$connectorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  knowledgeSummaries<T extends Prisma.Workspace$knowledgeSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$knowledgeSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KnowledgeSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2089,6 +2219,30 @@ export type Workspace$connectorsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ConnectorScalarFieldEnum | Prisma.ConnectorScalarFieldEnum[]
+}
+
+/**
+ * Workspace.knowledgeSummaries
+ */
+export type Workspace$knowledgeSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KnowledgeSummary
+   */
+  select?: Prisma.KnowledgeSummarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KnowledgeSummary
+   */
+  omit?: Prisma.KnowledgeSummaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KnowledgeSummaryInclude<ExtArgs> | null
+  where?: Prisma.KnowledgeSummaryWhereInput
+  orderBy?: Prisma.KnowledgeSummaryOrderByWithRelationInput | Prisma.KnowledgeSummaryOrderByWithRelationInput[]
+  cursor?: Prisma.KnowledgeSummaryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.KnowledgeSummaryScalarFieldEnum | Prisma.KnowledgeSummaryScalarFieldEnum[]
 }
 
 /**

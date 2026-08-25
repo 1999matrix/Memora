@@ -42,6 +42,12 @@ You currently run on **`StubAiClient`**. Swap methods one by one — Nest wiring
 - **Hint:** Call an LLM with `previousSummary` + messages older than the recent window; return 1–2 paragraphs
 - **Wiring:** BullMQ `summary-generation` job; Nest keeps last `RECENT_MESSAGE_LIMIT` messages verbatim
 
+## 7. Knowledge summarization (`summarizeKnowledge`) — Phase 7
+
+- **Goal:** Document / workspace / connector summaries stored in `KnowledgeSummary` (+ embedding)
+- **Hint:** Same summarizer LLM; input is extracted text or child summaries
+- **Retrieval:** summaries are vector-searched and fused with chunk hits (`metadata.isSummary`)
+
 ## Suggested learning order
 
 1. TXT/MD already works via stub file read — upload a `.txt` end-to-end first  

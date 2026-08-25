@@ -59,11 +59,17 @@ export const ModelName = {
   Document: 'Document',
   Connector: 'Connector',
   ConnectorSyncItem: 'ConnectorSyncItem',
+  KnowledgeSummary: 'KnowledgeSummary',
   DocumentVersion: 'DocumentVersion',
   DocumentChunk: 'DocumentChunk',
   Conversation: 'Conversation',
   ConversationSummary: 'ConversationSummary',
-  Message: 'Message'
+  Message: 'Message',
+  MessageFeedback: 'MessageFeedback',
+  LlmUsageEvent: 'LlmUsageEvent',
+  AuditLog: 'AuditLog',
+  RetrievalQueryLog: 'RetrievalQueryLog',
+  EvaluationRun: 'EvaluationRun'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -207,6 +213,23 @@ export const ConnectorSyncItemScalarFieldEnum = {
 export type ConnectorSyncItemScalarFieldEnum = (typeof ConnectorSyncItemScalarFieldEnum)[keyof typeof ConnectorSyncItemScalarFieldEnum]
 
 
+export const KnowledgeSummaryScalarFieldEnum = {
+  id: 'id',
+  kind: 'kind',
+  title: 'title',
+  summary: 'summary',
+  sourceHash: 'sourceHash',
+  organizationId: 'organizationId',
+  workspaceId: 'workspaceId',
+  documentId: 'documentId',
+  connectorId: 'connectorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type KnowledgeSummaryScalarFieldEnum = (typeof KnowledgeSummaryScalarFieldEnum)[keyof typeof KnowledgeSummaryScalarFieldEnum]
+
+
 export const DocumentVersionScalarFieldEnum = {
   id: 'id',
   documentId: 'documentId',
@@ -270,6 +293,88 @@ export const MessageScalarFieldEnum = {
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const MessageFeedbackScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  comment: 'comment',
+  retrievedChunks: 'retrievedChunks',
+  userId: 'userId',
+  workspaceId: 'workspaceId',
+  conversationId: 'conversationId',
+  messageId: 'messageId',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageFeedbackScalarFieldEnum = (typeof MessageFeedbackScalarFieldEnum)[keyof typeof MessageFeedbackScalarFieldEnum]
+
+
+export const LlmUsageEventScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  model: 'model',
+  operation: 'operation',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  totalTokens: 'totalTokens',
+  estimatedCostUsd: 'estimatedCostUsd',
+  requestDurationMs: 'requestDurationMs',
+  userId: 'userId',
+  organizationId: 'organizationId',
+  workspaceId: 'workspaceId',
+  conversationId: 'conversationId',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type LlmUsageEventScalarFieldEnum = (typeof LlmUsageEventScalarFieldEnum)[keyof typeof LlmUsageEventScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  resourceType: 'resourceType',
+  resourceId: 'resourceId',
+  userId: 'userId',
+  organizationId: 'organizationId',
+  workspaceId: 'workspaceId',
+  ip: 'ip',
+  userAgent: 'userAgent',
+  correlationId: 'correlationId',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const RetrievalQueryLogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  query: 'query',
+  topK: 'topK',
+  resultCount: 'resultCount',
+  latencyMs: 'latencyMs',
+  createdAt: 'createdAt'
+} as const
+
+export type RetrievalQueryLogScalarFieldEnum = (typeof RetrievalQueryLogScalarFieldEnum)[keyof typeof RetrievalQueryLogScalarFieldEnum]
+
+
+export const EvaluationRunScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  datasetVersion: 'datasetVersion',
+  metrics: 'metrics',
+  details: 'details',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type EvaluationRunScalarFieldEnum = (typeof EvaluationRunScalarFieldEnum)[keyof typeof EvaluationRunScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -58,6 +58,12 @@ enum ConnectorStatus {
   ERROR
 }
 
+enum KnowledgeSummaryKind {
+  DOCUMENT
+  WORKSPACE
+  CONNECTOR
+}
+
 model User {
   id               String    @id @default(cuid())
   email            String    @unique
@@ -124,6 +130,7 @@ model Workspace {
   documents     Document[]
   conversations Conversation[]
   connectors    Connector[]
+  knowledgeSummaries KnowledgeSummary[]
 }
 
 model WorkspaceMember {
@@ -164,6 +171,7 @@ model Document {
   versions     DocumentVersion[]
   chunks       DocumentChunk[]
   syncItems    ConnectorSyncItem[]
+  knowledgeSummary KnowledgeSummary?
 
   @@unique([connectorId, externalId])
   @@index([workspaceId, status])
@@ -190,6 +198,7 @@ model Connector {
   workspace    Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   documents    Document[]
   syncItems    ConnectorSyncItem[]
+  knowledgeSummary KnowledgeSummary?
 
   @@index([workspaceId])
   @@index([organizationId, type])
@@ -213,6 +222,29 @@ model ConnectorSyncItem {
 
   @@unique([connectorId, externalId])
   @@index([connectorId, lastSyncedAt])
+}
+
+model KnowledgeSummary {
+  id             String               @id @default(cuid())
+  kind           KnowledgeSummaryKind
+  title          String
+  summary        String
+  sourceHash     String?
+  /// Stored via raw SQL as pgvector for retrieval participation.
+  embedding      Unsupported("vector(1536)")?
+  organizationId String
+  workspaceId    String
+  documentId     String?              @unique
+  connectorId    String?              @unique
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+
+  workspace  Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  document   Document?  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  connector  Connector? @relation(fields: [connectorId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId, kind])
+  @@index([organizationId])
 }
 
 model DocumentVersion {
@@ -288,6 +320,99 @@ model Message {
   createdAt      DateTime    @default(now())
 
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  feedback     MessageFeedback[]
 
   @@index([conversationId])
+}
+
+enum FeedbackRating {
+  UP
+  DOWN
+}
+
+model MessageFeedback {
+  id               String         @id @default(cuid())
+  rating           FeedbackRating
+  comment          String?
+  retrievedChunks  Json?
+  userId           String
+  workspaceId      String
+  conversationId   String
+  messageId        String
+  createdAt        DateTime       @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([workspaceId, createdAt])
+  @@index([conversationId])
+}
+
+model LlmUsageEvent {
+  id               String   @id @default(cuid())
+  provider         String
+  model            String
+  operation        String
+  inputTokens      Int      @default(0)
+  outputTokens     Int      @default(0)
+  totalTokens      Int      @default(0)
+  estimatedCostUsd Float    @default(0)
+  requestDurationMs Int     @default(0)
+  userId           String?
+  organizationId   String?
+  workspaceId      String?
+  conversationId   String?
+  metadata         Json?
+  createdAt        DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([workspaceId, createdAt])
+  @@index([userId, createdAt])
+  @@index([model, createdAt])
+}
+
+model AuditLog {
+  id             String   @id @default(cuid())
+  action         String
+  resourceType   String
+  resourceId     String?
+  userId         String?
+  organizationId String?
+  workspaceId    String?
+  ip             String?
+  userAgent      String?
+  correlationId  String?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([correlationId])
+}
+
+model RetrievalQueryLog {
+  id             String   @id @default(cuid())
+  workspaceId    String
+  organizationId String?
+  userId         String?
+  query          String
+  topK           Int
+  resultCount    Int
+  latencyMs      Int
+  createdAt      DateTime @default(now())
+
+  @@index([workspaceId, createdAt])
+}
+
+model EvaluationRun {
+  id             String   @id @default(cuid())
+  name           String
+  datasetVersion String
+  metrics        Json
+  details        Json?
+  createdById    String?
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
 }
