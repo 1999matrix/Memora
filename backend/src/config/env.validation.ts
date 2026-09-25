@@ -15,4 +15,15 @@ export const validationSchema = Joi.object({
   JWT_REFRESH_SECRET: Joi.string().min(16).required(),
   JWT_ACCESS_EXPIRES_IN: Joi.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: Joi.string().default('7d'),
+  AI_PROVIDER: Joi.string().valid('stub', 'openai').default('stub'),
+  OPENAI_API_KEY: Joi.when('AI_PROVIDER', {
+    is: 'openai',
+    then: Joi.string().min(1).required(),
+    otherwise: Joi.string().optional().allow(''),
+  }),
+  OPENAI_CHAT_MODEL: Joi.string().default('gpt-4o-mini'),
+  OPENAI_EMBEDDING_MODEL: Joi.string().default('text-embedding-3-small'),
+  OPENAI_SUMMARY_MODEL: Joi.string().default('gpt-4o-mini'),
+  EMBEDDING_DIMENSIONS: Joi.number().default(1536),
+  STORAGE_ROOT: Joi.string().optional(),
 });

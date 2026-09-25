@@ -7,6 +7,7 @@ import {
   type AiClient,
   type ChatCitation,
 } from '../../ai/ai-client.interface';
+import { OpenAiAiClient } from '../../ai/openai-ai.client';
 import { SUMMARY_QUEUE } from '../../common/constants/rag.constants';
 import { MembershipService } from '../../common/services/membership.service';
 import { PrismaService } from '../../prisma';
@@ -179,16 +180,23 @@ export class ChatService {
     }
 
     const durationMs = Date.now() - chatStarted;
-    // Stub token accounting until real provider usage is wired.
+    const openAiUsage =
+      this.ai instanceof OpenAiAiClient ? this.ai.readChatUsage() : null;
     const approxIn = Math.ceil(message.length / 4) + contexts.length * 200;
     const approxOut = Math.ceil(full.length / 4);
     await this.usage.track({
-      provider: 'stub',
-      model: 'stub-chat',
+      provider: openAiUsage?.provider ?? 'stub',
+      model: openAiUsage?.model ?? 'stub-chat',
       operation: 'chatStream',
-      inputTokens: approxIn,
-      outputTokens: approxOut,
-      estimatedCostUsd: (approxIn + approxOut) * 0.0000002,
+      inputTokens: openAiUsage?.inputTokens ?? approxIn,
+      outputTokens: openAiUsage?.outputTokens ?? approxOut,
+      estimatedCostUsd: openAiUsage
+        ? this.estimateOpenAiChatCost(
+            openAiUsage.model,
+            openAiUsage.inputTokens,
+            openAiUsage.outputTokens,
+          )
+        : (approxIn + approxOut) * 0.0000002,
       requestDurationMs: durationMs,
       userId,
       organizationId: conversation.organizationId,
@@ -240,5 +248,21 @@ export class ChatService {
     }
 
     yield { type: 'done' };
+  }
+
+  /** ponytail: rough list prices; override when billing needs exact list rates. */
+  private estimateOpenAiChatCost(
+    model: string,
+    inputTokens: number,
+    outputTokens: number,
+  ): number {
+    const per1M: Record<string, { in: number; out: number }> = {
+      'gpt-4o-mini': { in: 0.15, out: 0.6 },
+      'gpt-4o': { in: 2.5, out: 10 },
+    };
+    const rate = per1M[model] ?? per1M['gpt-4o-mini'];
+    return (
+      (inputTokens * rate.in + outputTokens * rate.out) / 1_000_000
+    );
   }
 }
