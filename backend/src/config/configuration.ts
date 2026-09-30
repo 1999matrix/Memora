@@ -28,4 +28,14 @@ export default () => ({
       10,
     ),
   },
+  ai: {
+    provider: process.env.AI_PROVIDER || 'stub',
+    openai: {
+      apiKey: process.env.OPENAI_API_KEY,
+      chatModel: process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini',
+      embeddingModel:
+        process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
+      summaryModel: process.env.OPENAI_SUMMARY_MODEL || 'gpt-4o-mini',
+    },
+  },
 });

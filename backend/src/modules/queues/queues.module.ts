@@ -20,6 +20,13 @@ import { DocumentProcessor } from './document.processor';
           host: config.get<string>('redis.host'),
           port: config.get<number>('redis.port'),
           password: config.get<string>('redis.password') || undefined,
+          maxRetriesPerRequest: null,
+          // ponytail: in dev, do not reconnect. A missing Redis would otherwise retry forever and bury the startup log.
+          // Production keeps reconnecting. Upgrade path: always reconnect and log once.
+          retryStrategy: (times: number) => {
+            if (process.env.NODE_ENV !== 'production') return null;
+            return Math.min(times * 1000, 10_000);
+          },
         },
       }),
     }),

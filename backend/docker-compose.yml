@@ -58,7 +58,7 @@ services:
       - storage_data:/app/storage
     ports:
       - '3000:3000'
-    command: ['node', 'dist/src/main.js']
+    command: ['node', 'dist/main.js']
 
   # Same image, Nest process hosts BullMQ workers via AppModule processors
   worker:
@@ -74,7 +74,7 @@ services:
       PORT: 3001
     volumes:
       - storage_data:/app/storage
-    command: ['node', 'dist/src/main.js']
+    command: ['node', 'dist/main.js']
 
 volumes:
   postgres_data:
