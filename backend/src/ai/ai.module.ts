@@ -18,7 +18,10 @@ import { StubAiClient } from './stub-ai.client';
         stub: StubAiClient,
         openai: OpenAiAiClient,
       ) => {
-        const kind = resolveAiProvider(config.get<string>('ai.provider'));
+        const kind = resolveAiProvider(
+          config.get<string>('ai.provider'),
+          config.get<string>('ai.openai.apiKey'),
+        );
         return kind === 'openai' ? openai : stub;
       },
       inject: [ConfigService, StubAiClient, OpenAiAiClient],

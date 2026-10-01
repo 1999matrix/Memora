@@ -123,7 +123,6 @@ export class RetrievalService {
       score: Number(h.score),
       sourceUrl: null,
       metadata: {
-        stubPipeline: true,
         isSummary: Boolean(h.isSummary),
       },
     }));

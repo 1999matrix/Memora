@@ -29,7 +29,7 @@ export default () => ({
     ),
   },
   ai: {
-    provider: process.env.AI_PROVIDER || 'stub',
+    provider: process.env.AI_PROVIDER || 'auto',
     openai: {
       apiKey: process.env.OPENAI_API_KEY,
       chatModel: process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini',

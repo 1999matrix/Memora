@@ -21,7 +21,7 @@ import { Button } from './ui'
 const nav = [
   { to: 'chat', label: 'Chat', icon: ChatsCircle },
   { to: 'documents', label: 'Documents', icon: Books },
-  { to: 'connectors', label: 'Connectors', icon: PlugsConnected },
+  { to: 'connectors', label: 'Integrations', icon: PlugsConnected },
   { to: 'summaries', label: 'Summaries', icon: SquaresFour },
   { to: 'search', label: 'Search', icon: MagnifyingGlass },
   { to: 'settings', label: 'Settings', icon: GearSix },

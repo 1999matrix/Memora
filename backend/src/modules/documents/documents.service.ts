@@ -139,4 +139,19 @@ export class DocumentsService {
     await this.prisma.document.delete({ where: { id: documentId } });
     return { success: true };
   }
+
+  /** Re-run extract / chunk / embed (e.g. after switching from stub to OpenAI). */
+  async reprocess(userId: string, documentId: string) {
+    const document = await this.findOne(userId, documentId);
+    await this.prisma.document.update({
+      where: { id: documentId },
+      data: { status: 'PENDING', errorMessage: null },
+    });
+    await this.documentQueue.add(
+      'process',
+      { documentId: document.id },
+      { removeOnComplete: 100, removeOnFail: 50, attempts: 3 },
+    );
+    return { documentId: document.id, status: 'PENDING' };
+  }
 }

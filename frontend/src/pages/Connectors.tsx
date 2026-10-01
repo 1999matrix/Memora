@@ -1,37 +1,45 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState, type FormEvent } from 'react'
+import { useMemo, useState, type FormEvent } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { Alert, Badge, Button, EmptyState, Field, Input, PageHeader, Select, Skeleton, Surface, Textarea } from '../components/ui'
+import {
+  ConnectedIntegrationsList,
+  IntegrationsCatalog,
+} from '../components/integrations-grid'
+import {
+  Alert,
+  Button,
+  EmptyState,
+  Field,
+  Input,
+  PageHeader,
+  Skeleton,
+  Surface,
+  Textarea,
+} from '../components/ui'
 import { connectorsApi, summariesApi } from '../lib/api'
 import { errorMessage } from '../lib/client'
-import type { ConnectorStatus, ConnectorType } from '../types'
+import {
+  DEMO_CONFIG,
+  integrationByType,
+  INTEGRATION_CATALOG,
+} from '../lib/integrations'
+import type { ConnectorType } from '../types'
 
-const typeLabel: Record<string, string> = {
-  GOOGLE_DRIVE: 'Google Drive',
-  GITHUB: 'GitHub',
-  NOTION: 'Notion',
-  CONFLUENCE: 'Confluence',
-  JIRA: 'Jira',
-  SLACK: 'Slack',
-  SHAREPOINT: 'SharePoint',
-  POSTGRESQL: 'PostgreSQL',
-}
-
-function tone(status: ConnectorStatus) {
-  if (status === 'CONNECTED') return 'good' as const
-  if (status === 'ERROR') return 'bad' as const
-  if (status === 'SYNCING') return 'warn' as const
-  return 'neutral' as const
-}
+const typeLabel: Record<string, string> = Object.fromEntries(
+  INTEGRATION_CATALOG.map((i) => [i.type, i.name]),
+)
 
 export function ConnectorsPage() {
   const { workspaceId = '' } = useParams()
   const qc = useQueryClient()
   const [name, setName] = useState('')
-  const [type, setType] = useState<ConnectorType>('GITHUB')
-  const [configText, setConfigText] = useState('{}')
+  const [type, setType] = useState<ConnectorType>('GOOGLE_DRIVE')
+  const [configText, setConfigText] = useState(
+    JSON.stringify(integrationByType('GOOGLE_DRIVE')?.configTemplate ?? {}, null, 2),
+  )
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   const types = useQuery({ queryKey: ['connector-types'], queryFn: () => connectorsApi.types() })
   const list = useQuery({
@@ -39,6 +47,11 @@ export function ConnectorsPage() {
     queryFn: () => connectorsApi.list(workspaceId),
     enabled: Boolean(workspaceId),
   })
+
+  const connectedTypes = useMemo(
+    () => new Set((list.data ?? []).map((c) => c.type)),
+    [list.data],
+  )
 
   const create = useMutation({
     mutationFn: () => {
@@ -54,110 +67,146 @@ export function ConnectorsPage() {
     },
     onSuccess: () => {
       setName('')
-      setConfigText('{}')
+      setSuccess('Integration connected. Sync is queued when you run Sync.')
+      setError('')
       void qc.invalidateQueries({ queryKey: ['connectors', workspaceId] })
     },
-    onError: (err) => setError(errorMessage(err)),
+    onError: (err) => {
+      setSuccess('')
+      setError(errorMessage(err))
+    },
   })
 
-  const options = types.data?.length ? types.data : (Object.keys(typeLabel) as ConnectorType[])
+  const selectIntegration = (def: (typeof INTEGRATION_CATALOG)[number]) => {
+    setType(def.type)
+    setName(def.name)
+    setConfigText(JSON.stringify(def.configTemplate, null, 2))
+    setError('')
+    setSuccess('')
+  }
+
+  const apiTypes = types.data?.length ? types.data : INTEGRATION_CATALOG.map((i) => i.type)
+  const selected = integrationByType(type)
 
   return (
     <div className="h-full overflow-y-auto px-4 py-8 sm:px-8">
-      <PageHeader
-        title="Connectors"
-        description="Drivers are stubs today. You can still create, test, and queue a sync, then poll status."
-      />
-      {error ? <div className="mb-4"><Alert>{error}</Alert></div> : null}
-      <div className="grid gap-8 xl:grid-cols-[1fr_22rem]">
-        <div className="space-y-3">
-          {list.isLoading ? <Skeleton className="h-24" /> : null}
-          {!list.isLoading && !list.data?.length ? (
-            <EmptyState title="No connectors" body="Add a source. Sync runs asynchronously and may create documents when a driver is live." />
-          ) : null}
-          {list.data?.map((c) => (
-            <Surface key={c.id}>
-              <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-                <div>
-                  <p className="font-medium">{c.name}</p>
-                  <p className="mt-0.5 text-xs text-ink/45">
-                    {typeLabel[c.type] ?? c.type}
-                    {c.lastError ? ` · ${c.lastError}` : ''}
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge tone={tone(c.status)}>{c.status}</Badge>
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      void connectorsApi.test(c.id).then((r) => setError(r.ok ? '' : 'Test failed')).catch((err) => setError(errorMessage(err)))
-                    }}
-                  >
-                    Test
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      void connectorsApi.sync(c.id).then(() => qc.invalidateQueries({ queryKey: ['connectors', workspaceId] })).catch((err) => setError(errorMessage(err)))
-                    }}
-                  >
-                    Sync
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      void summariesApi.refreshConnector(c.id).catch((err) => setError(errorMessage(err)))
-                    }}
-                  >
-                    Summary
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      void connectorsApi.remove(c.id).then(() => qc.invalidateQueries({ queryKey: ['connectors', workspaceId] })).catch((err) => setError(errorMessage(err)))
-                    }}
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </div>
-            </Surface>
-          ))}
-        </div>
-        <Surface>
-          <form
-            className="space-y-4 p-5"
-            onSubmit={(e: FormEvent) => {
-              e.preventDefault()
-              setError('')
-              try {
+      <div className="mx-auto max-w-6xl">
+        <PageHeader
+          title="Integrations"
+          description="Connect cloud storage, collaboration tools, and databases. Live drivers sync content into your workspace index; use demo mode to try the flow without credentials."
+        />
+
+        {error ? (
+          <div className="mb-4">
+            <Alert>{error}</Alert>
+          </div>
+        ) : null}
+        {success ? (
+          <div className="mb-4 rounded-2xl bg-accent-soft px-4 py-3 text-sm text-accent dark:bg-accent/15 dark:text-[#9ad4c7]">
+            {success}
+          </div>
+        ) : null}
+
+        <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_20rem]">
+          <div className="min-w-0">
+            {list.isLoading ? <Skeleton className="mb-8 h-24" /> : null}
+            <ConnectedIntegrationsList
+              connectors={list.data ?? []}
+              typeLabel={typeLabel}
+              onTest={(id) => {
+                void connectorsApi
+                  .test(id)
+                  .then((r) => {
+                    setError(r.ok ? '' : 'Connection test failed')
+                    if (r.ok) setSuccess('Connection test passed')
+                  })
+                  .catch((err) => setError(errorMessage(err)))
+              }}
+              onSync={(id) => {
+                void connectorsApi
+                  .sync(id)
+                  .then(() => {
+                    setSuccess('Sync queued')
+                    void qc.invalidateQueries({ queryKey: ['connectors', workspaceId] })
+                  })
+                  .catch((err) => setError(errorMessage(err)))
+              }}
+              onSummary={(id) => {
+                void summariesApi.refreshConnector(id).catch((err) => setError(errorMessage(err)))
+              }}
+              onRemove={(id) => {
+                void connectorsApi
+                  .remove(id)
+                  .then(() => qc.invalidateQueries({ queryKey: ['connectors', workspaceId] }))
+                  .catch((err) => setError(errorMessage(err)))
+              }}
+            />
+
+            {!list.isLoading && !list.data?.length ? (
+              <EmptyState
+                title="No active connections"
+                body="Pick an integration below. Google Drive, OneDrive (SharePoint), Notion, Slack, and more share the same sync pipeline."
+              />
+            ) : null}
+
+            <IntegrationsCatalog
+              connectedTypes={connectedTypes}
+              activeType={type}
+              onSelect={selectIntegration}
+            />
+          </div>
+
+          <Surface className="h-fit lg:sticky lg:top-8">
+            <form
+              className="space-y-4 p-5"
+              onSubmit={(e: FormEvent) => {
+                e.preventDefault()
+                setError('')
+                setSuccess('')
                 create.mutate()
-              } catch (err) {
-                setError(errorMessage(err))
-              }
-            }}
-          >
-            <h2 className="font-semibold">Add connector</h2>
-            <Field label="Name">
-              <Input value={name} onChange={(e) => setName(e.target.value)} minLength={2} required />
-            </Field>
-            <Field label="Type">
-              <Select value={type} onChange={(e) => setType(e.target.value as ConnectorType)}>
-                {options.map((t) => (
-                  <option key={t} value={t}>
-                    {typeLabel[t] ?? t}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-            <Field label="Config" hint="Non-secret JSON. Secrets are not stored here yet.">
-              <Textarea value={configText} onChange={(e) => setConfigText(e.target.value)} className="font-mono text-xs" />
-            </Field>
-            <Button type="submit" disabled={create.isPending || name.trim().length < 2}>
-              Create
-            </Button>
-          </form>
-        </Surface>
+              }}
+            >
+              <div>
+                <h2 className="font-semibold tracking-tight">Connect {selected?.name ?? 'source'}</h2>
+                <p className="mt-1 text-xs leading-relaxed text-ink/50 dark:text-white/45">
+                  {selected?.fieldsHint}
+                </p>
+              </div>
+              <Field label="Display name">
+                <Input value={name} onChange={(e) => setName(e.target.value)} minLength={2} required />
+              </Field>
+              <Field label="Backend type">
+                <p className="rounded-[10px] bg-ink/5 px-3 py-2 text-xs font-mono text-ink/70 dark:bg-white/6 dark:text-white/60">
+                  {type}
+                  {!apiTypes.includes(type) ? ' (not reported by API)' : ''}
+                </p>
+              </Field>
+              <Field label="Configuration" hint="JSON credentials. Stored server-side; use secrets manager in production.">
+                <Textarea
+                  value={configText}
+                  onChange={(e) => setConfigText(e.target.value)}
+                  className="min-h-40 font-mono text-xs"
+                />
+              </Field>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    setConfigText(JSON.stringify(DEMO_CONFIG, null, 2))
+                    setSuccess('')
+                    setError('')
+                  }}
+                >
+                  Use demo mode
+                </Button>
+                <Button type="submit" disabled={create.isPending || name.trim().length < 2}>
+                  {create.isPending ? 'Connecting…' : 'Connect'}
+                </Button>
+              </div>
+            </form>
+          </Surface>
+        </div>
       </div>
     </div>
   )

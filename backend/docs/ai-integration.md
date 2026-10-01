@@ -16,8 +16,9 @@ The app injects `AI_CLIENT` (symbol). **Implementations:**
 Switch with env:
 
 ```env
-AI_PROVIDER=stub    # default, local dev
-AI_PROVIDER=openai  # production-style
+AI_PROVIDER=auto    # default — OpenAI when OPENAI_API_KEY is set, else stub
+AI_PROVIDER=stub    # force fake embeddings / answers (no API cost)
+AI_PROVIDER=openai  # force OpenAI (key required at boot)
 OPENAI_API_KEY=sk-...
 ```
 
@@ -35,10 +36,10 @@ Restart API **and** BullMQ worker after changing `AI_PROVIDER` — both processe
 ## Enable real OpenAI (step by step)
 
 1. Copy `.env.example` → `.env` if needed.
-2. Set `AI_PROVIDER=openai` and `OPENAI_API_KEY`.
+2. Set `OPENAI_API_KEY` (with `AI_PROVIDER=auto`, OpenAI is selected automatically).
 3. Start Postgres, Redis, backend, worker (`npm run start:dev` + worker process or Docker Compose).
 4. **Re-process documents** (critical): stub embeddings are hash-based pseudo-vectors. Vector search only works after re-ingest with OpenAI embeddings.
-   - Re-upload files or trigger document processing jobs for existing `Document` rows.
+   - `POST /documents/:id/reprocess`, or re-upload files.
 5. Chat via SSE — answers should cite retrieved chunks; usage is logged to `LlmUsageEvent` with real token counts when OpenAI is active.
 
 ## What each `AiClient` method does
@@ -48,7 +49,7 @@ Restart API **and** BullMQ worker after changing `AI_PROVIDER` — both processe
 | `extractText` | Plain text only; fake body for PDF | PDF, DOCX, TXT, MD |
 | `chunkText` | Fixed 800-char windows | Same (not LLM-based yet) |
 | `embed` | SHA256 pseudo-vectors | `embeddings.create` |
-| `rerank` | Pass-through | Pass-through (add Cohere/Voyage later) |
+| `rerank` | Lexical term boost | LLM relevance scores (lexical fallback) |
 | `chatStream` | Fake streamed answer | Streaming `chat.completions` + RAG prompt |
 | `summarizeConversation` | String concat | LLM rolling summary |
 | `summarizeKnowledge` | Truncated text | LLM summary |
@@ -68,11 +69,10 @@ POST /v1/summarize
 
 Nest would set `AI_PROVIDER=http` and point `AI_SERVICE_URL` at the sidecar.
 
-## Still stubbed (not `AiClient`)
+## Related (outside raw `AiClient` methods)
 
-- **Connectors** — `StubConnectorDriver` (GitHub, Slack, etc.).
-- **Eval LLM-as-judge** — heuristic scores in `evaluation.service.ts`.
-- **Reranking** — optional upgrade (cross-encoder or rerank API).
+- **Connectors** — live API drivers per type; demo stub without credentials (`docs/connectors.md`).
+- **Eval** — `evaluation.service.ts` calls `judgeRetrievalContext` on `AI_CLIENT`.
 
 ## Troubleshooting
 

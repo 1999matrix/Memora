@@ -5,9 +5,13 @@ import { EMBEDDING_DIMENSIONS } from '../common/constants/rag.constants';
 import {
   AiClient,
   ChatRequest,
+  RetrievalEvalJudgeRequest,
+  RetrievalEvalJudgeResult,
   RetrievedChunk,
   TextChunkDraft,
 } from './ai-client.interface';
+import { lexicalRerank } from './llm-rerank.util';
+import { heuristicRetrievalJudge } from './retrieval-eval.util';
 
 /**
  * STUB AI — replace methods with real extractors / embeddings / LLM.
@@ -78,11 +82,10 @@ export class StubAiClient implements AiClient {
   }
 
   async rerank(
-    _query: string,
+    query: string,
     chunks: RetrievedChunk[],
   ): Promise<RetrievedChunk[]> {
-    this.logger.warn('STUB rerank — pass-through');
-    return chunks;
+    return lexicalRerank(query, chunks);
   }
 
   async *chatStream(request: ChatRequest): AsyncGenerator<string, void, unknown> {
@@ -150,6 +153,12 @@ export class StubAiClient implements AiClient {
       .filter(Boolean)
       .join(' — ')
       .slice(0, 1200);
+  }
+
+  async judgeRetrievalContext(
+    request: RetrievalEvalJudgeRequest,
+  ): Promise<RetrievalEvalJudgeResult> {
+    return heuristicRetrievalJudge(request);
   }
 
   private hashEmbed(text: string): number[] {

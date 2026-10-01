@@ -49,6 +49,17 @@ export interface KnowledgeSummaryRequest {
   text: string;
 }
 
+export interface RetrievalEvalJudgeRequest {
+  question: string;
+  retrievedContext: string;
+  expectedAnswerHints: string[];
+}
+
+export interface RetrievalEvalJudgeResult {
+  answerRelevance: number;
+  faithfulness: number;
+}
+
 export interface AiClient {
   extractText(input: {
     buffer: Buffer;
@@ -84,4 +95,9 @@ export interface AiClient {
    * Stub returns a short digest — replace with a real summarizer LLM.
    */
   summarizeKnowledge(request: KnowledgeSummaryRequest): Promise<string>;
+
+  /** LLM-as-judge scores for golden-set eval (0–1 each). */
+  judgeRetrievalContext(
+    request: RetrievalEvalJudgeRequest,
+  ): Promise<RetrievalEvalJudgeResult>;
 }

@@ -62,4 +62,9 @@ export class DocumentsController {
   remove(@CurrentUser() user: AuthUser, @Param('id') id: string) {
     return this.documentsService.remove(user.id, id);
   }
+
+  @Post('documents/:id/reprocess')
+  reprocess(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return this.documentsService.reprocess(user.id, id);
+  }
 }

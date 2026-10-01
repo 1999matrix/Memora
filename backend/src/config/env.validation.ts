@@ -15,9 +15,11 @@ export const validationSchema = Joi.object({
   JWT_REFRESH_SECRET: Joi.string().min(16).required(),
   JWT_ACCESS_EXPIRES_IN: Joi.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: Joi.string().default('7d'),
-  AI_PROVIDER: Joi.string().valid('stub', 'openai').default('stub'),
+  AI_PROVIDER: Joi.string()
+    .valid('stub', 'openai', 'auto')
+    .default('auto'),
   OPENAI_API_KEY: Joi.when('AI_PROVIDER', {
-    is: 'openai',
+    is: Joi.valid('openai'),
     then: Joi.string().min(1).required(),
     otherwise: Joi.string().optional().allow(''),
   }),

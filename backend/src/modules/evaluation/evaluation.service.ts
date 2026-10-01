@@ -1,7 +1,8 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
+import { AI_CLIENT, type AiClient } from '../../ai/ai-client.interface';
 import { PrismaService } from '../../prisma';
 import { RetrievalService } from '../retrieval/retrieval.service';
 
@@ -17,6 +18,7 @@ export class EvaluationService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly retrieval: RetrievalService,
+    @Inject(AI_CLIENT) private readonly ai: AiClient,
   ) {}
 
   private loadDataset(): GoldenCase[] {
@@ -26,7 +28,7 @@ export class EvaluationService {
 
   /**
    * Runs retrieval-focused eval against the golden set.
-   * Answer relevance / faithfulness are stub heuristics until real LLM judges land.
+   * Answer relevance / faithfulness use AiClient LLM-as-judge when OpenAI is active.
    */
   async run(input: {
     userId: string;
@@ -45,6 +47,7 @@ export class EvaluationService {
     let relevanceSum = 0;
     let faithfulnessSum = 0;
     let latencySum = 0;
+    let evalTokenCost = 0;
 
     for (const item of dataset) {
       const started = Date.now();
@@ -78,13 +81,15 @@ export class EvaluationService {
         ? 1
         : relevantCount / Math.max(item.expectedSourceHints.length, 1);
 
-      // Stub LLM-as-judge stand-ins
-      const answerRelevance = item.expectedAnswerHints.some((h) =>
-        blob.toLowerCase().includes(h.toLowerCase()),
-      )
-        ? 1
-        : 0.3;
-      const faithfulness = relevantCount > 0 ? 0.8 : 0.2;
+      const judge = await this.ai.judgeRetrievalContext({
+        question: item.question,
+        retrievedContext: blob,
+        expectedAnswerHints: item.expectedAnswerHints,
+      });
+      const answerRelevance = judge.answerRelevance;
+      const faithfulness = judge.faithfulness;
+      evalTokenCost +=
+        ((blob.length + item.question.length) / 4) * 0.00000015;
 
       recallSum += recall;
       precisionSum += precision;
@@ -116,7 +121,7 @@ export class EvaluationService {
       answerRelevance: relevanceSum / n,
       faithfulness: faithfulnessSum / n,
       averageLatencyMs: latencySum / n,
-      tokenCost: 0,
+      tokenCost: evalTokenCost,
       topK,
       cases: n,
     };

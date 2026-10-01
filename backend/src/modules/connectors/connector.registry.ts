@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { ConnectorType } from '../../generated/prisma/client';
 import { Connector } from './connector.interface';
-import { StubConnectorDriver } from './drivers/stub-connector.driver';
+import { DelegatingConnectorDriver } from './drivers/delegating.connector';
 
 @Injectable()
 export class ConnectorRegistry {
@@ -10,12 +10,7 @@ export class ConnectorRegistry {
 
   constructor() {
     for (const type of Object.values(ConnectorType)) {
-      this.drivers.set(
-        type,
-        new StubConnectorDriver(
-          type as ConstructorParameters<typeof StubConnectorDriver>[0],
-        ),
-      );
+      this.drivers.set(type, new DelegatingConnectorDriver(type));
     }
   }
 

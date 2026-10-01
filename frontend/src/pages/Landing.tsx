@@ -44,11 +44,44 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+      <section className="mx-auto max-w-6xl px-6 pb-16 pt-4">
+        <h2 className="max-w-3xl text-3xl font-semibold tracking-tight leading-tight md:text-4xl">
+          Integrations that feed your knowledge base
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/55 dark:text-white/50">
+          Connect Google Drive, OneDrive and SharePoint, Notion, Confluence, Slack, Jira, GitHub, and PostgreSQL.
+          Memora syncs in the background and keeps citations tied to the source.
+        </p>
+        <div
+          className="mt-10 grid grid-flow-dense gap-3 sm:grid-cols-2 lg:grid-cols-4"
+          style={{ gridAutoRows: 'minmax(7rem, auto)' }}
+        >
+          {[
+            ['Google Drive', 'Folder sync via Drive API', 'from-[#4285F4]/20'],
+            ['OneDrive & SharePoint', 'Microsoft 365 libraries', 'from-[#0078D4]/25'],
+            ['Notion & Confluence', 'Wiki and database pages', 'from-ink/10'],
+            ['Slack & Jira', 'Channels and issues', 'from-[#E01E5A]/15'],
+            ['GitHub', 'Repo markdown and README', 'from-ink/15'],
+            ['PostgreSQL', 'SQL-backed records', 'from-[#336791]/20'],
+          ].map(([title, body, grad]) => (
+            <div
+              key={title}
+              className="relative overflow-hidden rounded-[1.25rem] p-4 ring-1 ring-ink/8 dark:ring-white/10"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${grad} to-transparent opacity-90`} />
+              <div className="relative">
+                <p className="font-semibold tracking-tight">{title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink/55 dark:text-white/50">{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="grid gap-10 md:grid-cols-3">
           {[
             ['Documents', 'Upload PDF, DOCX, Markdown, and text. Indexing runs in the background.'],
-            ['Connectors', 'Wire Drive, GitHub, Notion, Slack, and more. Sync is queued and observable.'],
+            ['Integrations', 'Connect sources once; test, sync, and re-index from the workspace.'],
             ['Governance', 'Org and workspace roles, feedback, cost analytics, and a platform admin view.'],
           ].map(([title, body]) => (
             <div key={title}>

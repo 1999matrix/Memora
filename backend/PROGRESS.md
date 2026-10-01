@@ -1,8 +1,7 @@
 # Progress — real AI integration
 
-- Added `OpenAiAiClient` implementing `AiClient` (chat stream, embeddings, summaries, PDF/DOCX extract).
-- `AI_PROVIDER=stub|openai` switches implementation in `AiModule`.
-- Extended config / `.env.example` / Joi validation for OpenAI env vars.
-- Chat usage tracking reads real token counts from OpenAI when active.
-- Documented setup and re-embed requirement in `docs/ai-integration.md`.
-- Dependencies: `openai`, `pdf-parse`, `mammoth`.
+See `documents/progress.md` for the full project log.
+
+- `OpenAiAiClient` + `StubAiClient` behind `AI_CLIENT`.
+- `AI_PROVIDER=auto|stub|openai`; default `auto`.
+- Document reprocess endpoint, Docker AI env, `docs/ai-integration.md`.
