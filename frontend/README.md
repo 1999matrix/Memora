@@ -1,32 +1,20 @@
-# React + TypeScript + Vite
+# Memora frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite UI for **backend-v2** (`../backend-v2/api`).
 
-Currently, two official plugins are available:
+## Dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Start Postgres, Redis, API (port **7000**), and worker — see [backend-v2 README](../backend-v2/README.md).
+2. Copy `.env.example` to `.env` (`VITE_API_BASE_URL=http://localhost:7000`).
+3. Run:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+App: `http://localhost:5173`. Vite proxies `/api`, `/health`, and `/docs` to the API.
+
+## Stack
+
+- React 19, React Router, TanStack Query, Axios, Tailwind 4

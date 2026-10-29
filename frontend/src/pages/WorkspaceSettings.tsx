@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Alert, Button, Field, Input, PageHeader, Select, Surface } from '../components/ui'
 import { feedbackApi, workspacesApi } from '../lib/api'
 import { useAuth } from '../lib/auth'
-import { errorMessage } from '../lib/client'
+import { API_ORIGIN, errorMessage } from '../lib/client'
 import { formatDateTime, fullName } from '../lib/format'
 import type { WorkspaceRole } from '../types'
 
@@ -170,6 +170,17 @@ export function WorkspaceSettingsPage() {
           )}
         </div>
       </Surface>
+      <p className="mt-8 text-xs text-ink/40 dark:text-white/35">
+        HTTP API reference:{' '}
+        <a
+          href={`${API_ORIGIN}/docs`}
+          target="_blank"
+          rel="noreferrer"
+          className="text-accent underline-offset-2 hover:underline"
+        >
+          OpenAPI docs
+        </a>
+      </p>
     </div>
   )
 }

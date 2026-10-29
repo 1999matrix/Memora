@@ -104,6 +104,8 @@ export const documentsApi = {
       .then((r) => unwrap(r.data)),
   get: (id: string) => http.get<ApiSuccess<DocumentRecord>>(`/documents/${id}`).then((r) => unwrap(r.data)),
   remove: (id: string) => http.delete<ApiSuccess<unknown>>(`/documents/${id}`).then((r) => unwrap(r.data)),
+  reprocess: (id: string) =>
+    http.post<ApiSuccess<{ documentId: string; status: string }>>(`/documents/${id}/reprocess`).then((r) => unwrap(r.data)),
   upload: (workspaceId: string, file: File) => {
     const form = new FormData()
     form.append('file', file)

@@ -1,4 +1,4 @@
-import { Trash, UploadSimple } from '@phosphor-icons/react'
+import { ArrowClockwise, Trash, UploadSimple } from '@phosphor-icons/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -90,6 +90,20 @@ export function DocumentsPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Badge tone={statusTone(doc.status)}>{doc.status}</Badge>
+                {doc.status === 'FAILED' ? (
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      void documentsApi
+                        .reprocess(doc.id)
+                        .then(() => qc.invalidateQueries({ queryKey: ['documents', workspaceId] }))
+                        .catch((err) => setError(errorMessage(err)))
+                    }}
+                  >
+                    <ArrowClockwise size={16} />
+                    Retry
+                  </Button>
+                ) : null}
                 <Button
                   variant="ghost"
                   onClick={() => {

@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       '/api': { target: 'http://localhost:7000', changeOrigin: true },
       '/health': { target: 'http://localhost:7000', changeOrigin: true },
+      '/docs': { target: 'http://localhost:7000', changeOrigin: true },
     },
   },
 })

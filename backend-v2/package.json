@@ -1,0 +1,14 @@
+{
+  "name": "memora-backend-v2",
+  "private": true,
+  "scripts": {
+    "dev:api": "npm run dev --prefix api",
+    "dev:worker": "npm run dev:worker --prefix api",
+    "dev": "concurrently -n api,worker -c blue,magenta \"npm run dev:api\" \"npm run dev:worker\"",
+    "build": "npm run build --prefix api",
+    "typecheck": "npm run typecheck --prefix api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
